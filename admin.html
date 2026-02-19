@@ -8,555 +8,436 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --g1: #0d2218;
-  --g2: #1b3a2d;
-  --g3: #2a5540;
-  --g4: #3d7a5a;
-  --pale: #a8c5b5;
-  --cream: #f4ede0;
-  --cream2: #ede3d0;
-  --gold: #c9a84c;
-  --text: #152018;
-  --text2: #2e4a38;
-  --red: #c0392b;
-  --red-light: #fdf0ee;
-  --green-chip: #eaf4ef;
-  --green-text: #1b5e38;
+  --g1: #0d2218; --g2: #1b3a2d; --g3: #2a5540; --g4: #3d7a5a;
+  --pale: #a8c5b5; --cream: #f4ede0; --cream2: #ede3d0;
+  --gold: #c9a84c; --text: #152018; --text2: #2e4a38;
+  --red: #c0392b; --red-light: #fdf0ee;
+  --green-chip: #eaf4ef; --green-text: #1b5e38;
 }
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Montserrat',sans-serif;background:radial-gradient(ellipse 70% 50% at 80% 0%,#2a554020 0%,transparent 60%),radial-gradient(ellipse 60% 60% at 0% 100%,#1b3a2d15 0%,transparent 60%),var(--cream);min-height:100vh;color:var(--text)}
 
-*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-html { scroll-behavior: smooth; }
+/* ── SCREENS ── */
+.screen{display:none}
+.screen.active{display:block}
+#screenLogin{min-height:100vh;display:none;align-items:center;justify-content:center;padding:20px}
+#screenLogin.active{display:flex}
 
-body {
-  font-family: 'Montserrat', sans-serif;
-  background:
-    radial-gradient(ellipse 70% 50% at 80% 0%, #2a554020 0%, transparent 60%),
-    radial-gradient(ellipse 60% 60% at 0% 100%, #1b3a2d15 0%, transparent 60%),
-    var(--cream);
-  min-height: 100vh;
-  color: var(--text);
-}
+/* ── CARD ── */
+.card{background:#fff;border-radius:20px;padding:clamp(32px,6vw,52px) clamp(24px,5vw,44px);max-width:440px;width:100%;box-shadow:0 24px 64px rgba(13,34,24,.12);border:1px solid rgba(168,197,181,.3)}
+.card-center{text-align:center}
+.logo{font-family:'Dancing Script',cursive;font-size:36px;color:var(--g2);margin-bottom:4px}
+.logo-sub{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--text2);opacity:.6;margin-bottom:32px}
 
-/* ── LOGIN ── */
-#loginScreen {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-}
+.field-label{display:block;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;font-weight:700;color:var(--g2);margin-bottom:8px}
+.field-hint{font-size:11px;color:var(--text2);opacity:.55;margin-bottom:10px;line-height:1.5}
+.field-input{width:100%;padding:12px 14px;border:1.5px solid var(--pale);border-radius:10px;font-family:'Montserrat',sans-serif;font-size:14px;color:var(--text);background:var(--cream);outline:none;transition:border-color .2s;-webkit-appearance:none;margin-bottom:18px}
+.field-input:focus{border-color:var(--g3);box-shadow:0 0 0 3px rgba(42,85,64,.08)}
+.field-input.mono{font-family:monospace;font-size:13px;letter-spacing:.5px}
 
-.login-card {
-  background: #fff;
-  border-radius: 20px;
-  padding: 48px 40px;
-  max-width: 400px;
-  width: 100%;
-  box-shadow: 0 24px 64px rgba(13,34,24,0.12);
-  border: 1px solid rgba(168,197,181,0.3);
-  text-align: center;
-}
+.btn-full{width:100%;padding:14px;border-radius:10px;font-family:'Montserrat',sans-serif;font-size:12px;letter-spacing:3px;text-transform:uppercase;font-weight:700;cursor:pointer;border:none;transition:all .25s;margin-top:4px}
+.btn-primary{background:var(--g2);color:#fff}
+.btn-primary:hover{background:var(--g3);transform:translateY(-1px);box-shadow:0 6px 20px rgba(27,58,45,.25)}
+.btn-primary:disabled{opacity:.5;transform:none;cursor:not-allowed}
 
-.login-logo {
-  font-family: 'Dancing Script', cursive;
-  font-size: 36px;
-  color: var(--g2);
-  margin-bottom: 6px;
-}
+.error-msg{color:var(--red);font-size:12px;margin:8px 0;display:none;line-height:1.5}
+.error-msg.show{display:block}
 
-.login-sub {
-  font-size: 11px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--text2);
-  opacity: 0.6;
-  margin-bottom: 36px;
-}
+.step-note{margin-top:20px;padding:14px 16px;background:rgba(168,197,181,.1);border:1px solid rgba(168,197,181,.3);border-radius:10px;font-size:12px;color:var(--text2);line-height:1.7}
+.step-note strong{color:var(--g2)}
+.step-note a{color:var(--g3);text-decoration:none;font-weight:600}
+.step-note a:hover{text-decoration:underline}
 
-.login-label {
-  display: block;
-  font-size: 10px;
-  letter-spacing: 2.5px;
-  text-transform: uppercase;
-  font-weight: 700;
-  color: var(--g2);
-  text-align: left;
-  margin-bottom: 10px;
-}
+/* ── APP HEADER ── */
+#screenApp{display:none}
+#screenApp.active{display:block}
+.app-header{background:radial-gradient(ellipse 80% 80% at 20% 0%,#3d7a5a 0%,transparent 55%),radial-gradient(ellipse 60% 60% at 80% 100%,#2a5540 0%,transparent 50%),var(--g2);color:#fff;padding:20px clamp(16px,5vw,40px);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;position:sticky;top:0;z-index:100}
+.header-left h1{font-family:'Dancing Script',cursive;font-size:clamp(20px,5vw,28px);line-height:1;margin-bottom:2px}
+.header-left p{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--pale);opacity:.8}
+.header-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.btn{padding:8px 16px;border-radius:8px;font-family:'Montserrat',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:700;cursor:pointer;border:none;transition:all .2s;white-space:nowrap}
+.btn-outline{background:transparent;border:1.5px solid rgba(255,255,255,.25);color:#fff}
+.btn-outline:hover{background:rgba(255,255,255,.1)}
+.btn-white{background:#fff;color:var(--g2)}
+.btn-white:hover{background:var(--cream)}
+.btn-sm-red{background:rgba(192,57,43,.15);border:1.5px solid rgba(192,57,43,.3);color:#fff}
+.btn-sm-red:hover{background:rgba(192,57,43,.3)}
 
-.login-input {
-  width: 100%;
-  padding: 13px 16px;
-  border: 1.5px solid var(--pale);
-  border-radius: 10px;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 15px;
-  color: var(--text);
-  background: var(--cream);
-  outline: none;
-  transition: border-color 0.2s;
-  margin-bottom: 16px;
-  -webkit-appearance: none;
-}
-.login-input:focus { border-color: var(--g3); }
+/* loading */
+.loading-bar{height:3px;background:linear-gradient(90deg,var(--g3),var(--pale));animation:lb 1.2s ease-in-out infinite alternate;display:none}
+.loading-bar.show{display:block}
+@keyframes lb{from{opacity:.3}to{opacity:1}}
 
-.login-btn {
-  width: 100%;
-  padding: 15px;
-  background: var(--g2);
-  color: #fff;
-  border: none;
-  border-radius: 10px;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 12px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.25s;
-}
-.login-btn:hover { background: var(--g3); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(27,58,45,0.25); }
+/* stats */
+.stats-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;padding:clamp(16px,4vw,28px) clamp(16px,5vw,40px);max-width:1100px;margin:0 auto}
+.stat-card{background:#fff;border-radius:14px;padding:18px 20px;border:1px solid rgba(168,197,181,.25);box-shadow:0 4px 16px rgba(13,34,24,.06)}
+.stat-num{font-size:clamp(26px,5vw,36px);font-weight:800;color:var(--g2);line-height:1;margin-bottom:4px}
+.stat-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text2);opacity:.6;font-weight:600}
 
-.login-error {
-  color: var(--red);
-  font-size: 12px;
-  margin-top: 10px;
-  display: none;
-}
+/* netlify source banner */
+.source-banner{background:linear-gradient(135deg,#f0f9f4,#e8f5ee);border:1.5px solid #a8c5b5;border-radius:12px;padding:10px 16px;margin:0 clamp(16px,5vw,40px) 14px;max-width:1100px;margin-left:auto;margin-right:auto;font-size:12px;color:var(--g2);display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.source-banner span{opacity:.8}
+.source-banner a{color:var(--g3);font-weight:600;text-decoration:none;font-size:11px}
+.source-banner a:hover{text-decoration:underline}
 
-.login-hint {
-  margin-top: 20px;
-  font-size: 12px;
-  color: var(--text2);
-  opacity: 0.55;
-  line-height: 1.6;
-}
-
-/* ── APP ── */
-#app { display: none; }
-
-/* header */
-.app-header {
-  background:
-    radial-gradient(ellipse 80% 80% at 20% 0%, #3d7a5a 0%, transparent 55%),
-    radial-gradient(ellipse 60% 60% at 80% 100%, #2a5540 0%, transparent 50%),
-    var(--g2);
-  color: #fff;
-  padding: 24px clamp(16px, 5vw, 40px);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  flex-wrap: wrap;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-
-.header-left h1 {
-  font-family: 'Dancing Script', cursive;
-  font-size: clamp(22px, 5vw, 30px);
-  line-height: 1;
-  margin-bottom: 2px;
-}
-
-.header-left p {
-  font-size: 10px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--pale);
-  opacity: 0.8;
-}
-
-.header-actions { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
-
-.btn {
-  padding: 9px 18px;
-  border-radius: 8px;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 11px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  font-weight: 700;
-  cursor: pointer;
-  border: none;
-  transition: all 0.2s;
-}
-.btn-outline {
-  background: transparent;
-  border: 1.5px solid rgba(255,255,255,0.25);
-  color: #fff;
-}
-.btn-outline:hover { background: rgba(255,255,255,0.1); }
-.btn-white {
-  background: #fff;
-  color: var(--g2);
-}
-.btn-white:hover { background: var(--cream); }
-
-/* stats row */
-.stats-row {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 14px;
-  padding: clamp(20px, 4vw, 32px) clamp(16px, 5vw, 40px);
-  max-width: 1100px;
-  margin: 0 auto;
-}
-
-.stat-card {
-  background: #fff;
-  border-radius: 14px;
-  padding: 20px 22px;
-  border: 1px solid rgba(168,197,181,0.25);
-  box-shadow: 0 4px 16px rgba(13,34,24,0.06);
-}
-
-.stat-num {
-  font-size: clamp(28px, 5vw, 38px);
-  font-weight: 800;
-  color: var(--g2);
-  line-height: 1;
-  margin-bottom: 4px;
-}
-
-.stat-label {
-  font-size: 10px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--text2);
-  opacity: 0.6;
-  font-weight: 600;
-}
-
-/* filters */
-.controls-bar {
-  padding: 0 clamp(16px, 5vw, 40px) 20px;
-  max-width: 1100px;
-  margin: 0 auto;
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-  align-items: center;
-}
-
-.search-box {
-  flex: 1;
-  min-width: 180px;
-  padding: 11px 16px;
-  border: 1.5px solid var(--pale);
-  border-radius: 10px;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 14px;
-  color: var(--text);
-  background: #fff;
-  outline: none;
-  transition: border-color 0.2s;
-}
-.search-box:focus { border-color: var(--g3); }
-
-.filter-btn {
-  padding: 11px 18px;
-  border-radius: 10px;
-  border: 1.5px solid var(--pale);
-  background: #fff;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--text2);
-  cursor: pointer;
-  transition: all 0.2s;
-  white-space: nowrap;
-}
-.filter-btn:hover, .filter-btn.active {
-  background: var(--g2);
-  border-color: var(--g2);
-  color: #fff;
-}
+/* controls */
+.controls-bar{padding:0 clamp(16px,5vw,40px) 16px;max-width:1100px;margin:0 auto;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.search-box{flex:1;min-width:160px;padding:10px 14px;border:1.5px solid var(--pale);border-radius:10px;font-family:'Montserrat',sans-serif;font-size:14px;color:var(--text);background:#fff;outline:none;transition:border-color .2s}
+.search-box:focus{border-color:var(--g3)}
+.filter-btn{padding:10px 16px;border-radius:10px;border:1.5px solid var(--pale);background:#fff;font-family:'Montserrat',sans-serif;font-size:12px;font-weight:600;color:var(--text2);cursor:pointer;transition:all .2s;white-space:nowrap}
+.filter-btn:hover,.filter-btn.active{background:var(--g2);border-color:var(--g2);color:#fff}
 
 /* table */
-.table-wrap {
-  padding: 0 clamp(16px, 5vw, 40px) 60px;
-  max-width: 1100px;
-  margin: 0 auto;
-  overflow-x: auto;
-}
+.table-wrap{padding:0 clamp(16px,5vw,40px) 60px;max-width:1100px;margin:0 auto;overflow-x:auto}
+.guests-table{width:100%;border-collapse:separate;border-spacing:0 8px;min-width:640px}
+.guests-table thead th{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;font-weight:700;color:var(--text2);opacity:.55;padding:0 14px 6px;text-align:left}
+.guests-table tbody tr{background:#fff;border-radius:12px;box-shadow:0 2px 8px rgba(13,34,24,.05);transition:box-shadow .2s,transform .15s}
+.guests-table tbody tr:hover{box-shadow:0 6px 20px rgba(13,34,24,.1);transform:translateY(-1px)}
+.guests-table tbody td{padding:13px 14px;font-size:14px;vertical-align:middle}
+.guests-table tbody td:first-child{border-radius:12px 0 0 12px}
+.guests-table tbody td:last-child{border-radius:0 12px 12px 0}
+.td-name{font-weight:700;color:var(--g2)}
+.td-ts{font-size:11px;color:var(--text2);opacity:.55}
 
-.guests-table {
-  width: 100%;
-  border-collapse: separate;
-  border-spacing: 0 8px;
-  min-width: 600px;
-}
+.chip{display:inline-block;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:.5px}
+.chip-yes{background:var(--green-chip);color:var(--green-text)}
+.chip-no{background:var(--red-light);color:var(--red)}
+.chip-food{background:rgba(201,168,76,.12);color:#7a5e10}
+.drinks-list{font-size:12px;color:var(--text2);line-height:1.7;max-width:180px}
 
-.guests-table thead th {
-  font-size: 10px;
-  letter-spacing: 2.5px;
-  text-transform: uppercase;
-  font-weight: 700;
-  color: var(--text2);
-  opacity: 0.55;
-  padding: 0 16px 6px;
-  text-align: left;
-}
+.btn-del{width:28px;height:28px;border-radius:7px;border:none;background:rgba(192,57,43,.08);color:var(--red);cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.btn-del:hover{background:var(--red);color:#fff}
 
-.guests-table tbody tr {
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(13,34,24,0.05);
-  transition: box-shadow 0.2s, transform 0.15s;
-}
-.guests-table tbody tr:hover {
-  box-shadow: 0 6px 20px rgba(13,34,24,0.1);
-  transform: translateY(-1px);
-}
-
-.guests-table tbody td {
-  padding: 16px 16px;
-  font-size: 14px;
-  vertical-align: middle;
-}
-
-.guests-table tbody td:first-child { border-radius: 12px 0 0 12px; }
-.guests-table tbody td:last-child { border-radius: 0 12px 12px 0; }
-
-.td-name { font-weight: 700; color: var(--g2); }
-.td-ts { font-size: 12px; color: var(--text2); opacity: 0.55; }
-
-.chip {
-  display: inline-block;
-  padding: 4px 10px;
-  border-radius: 20px;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-}
-.chip-yes { background: var(--green-chip); color: var(--green-text); }
-.chip-no { background: var(--red-light); color: var(--red); }
-.chip-food { background: rgba(201,168,76,0.12); color: #7a5e10; }
-
-.drinks-list { font-size: 12px; color: var(--text2); line-height: 1.7; max-width: 200px; }
-
-/* empty state */
-.empty-state {
-  text-align: center;
-  padding: 80px 20px;
-  color: var(--text2);
-  opacity: 0.5;
-}
-.empty-state svg { width: 48px; height: 48px; margin: 0 auto 16px; display: block; }
-.empty-state p { font-size: 15px; font-weight: 500; }
+.empty-state{text-align:center;padding:60px 20px;color:var(--text2);opacity:.5}
+.empty-state p{font-size:15px;font-weight:500;margin-top:12px}
 
 /* mobile cards */
-@media (max-width: 640px) {
-  .table-wrap { padding: 0 16px 60px; overflow-x: visible; }
-  .guests-table { display: none; }
-  .mobile-cards { display: flex; flex-direction: column; gap: 12px; }
+@media(max-width:640px){
+  .table-wrap{padding:0 16px 60px;overflow-x:visible}
+  .guests-table{display:none}
+  .mobile-cards{display:flex;flex-direction:column;gap:10px}
 }
-@media (min-width: 641px) {
-  .mobile-cards { display: none; }
-}
+@media(min-width:641px){.mobile-cards{display:none}}
 
-.m-card {
-  background: #fff;
-  border-radius: 14px;
-  padding: 18px;
-  box-shadow: 0 2px 10px rgba(13,34,24,0.07);
-}
-.m-card-name { font-weight: 700; color: var(--g2); font-size: 16px; margin-bottom: 10px; }
-.m-card-row { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 7px; font-size: 13px; }
-.m-card-key { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 700; color: var(--text2); opacity: 0.5; min-width: 70px; margin-top: 2px; }
-.m-card-ts { font-size: 11px; color: var(--text2); opacity: 0.45; margin-top: 10px; }
+.m-card{background:#fff;border-radius:14px;padding:16px;box-shadow:0 2px 10px rgba(13,34,24,.07);position:relative}
+.m-card-name{font-weight:700;color:var(--g2);font-size:15px;margin-bottom:10px;padding-right:36px}
+.m-card-row{display:flex;align-items:flex-start;gap:10px;margin-bottom:6px;font-size:13px}
+.m-card-key{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;color:var(--text2);opacity:.5;min-width:70px;margin-top:2px}
+.m-card-ts{font-size:11px;color:var(--text2);opacity:.45;margin-top:8px}
+.m-card-del{position:absolute;top:14px;right:14px;width:30px;height:30px;border-radius:8px;border:none;background:rgba(192,57,43,.08);color:var(--red);cursor:pointer;font-size:15px;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.m-card-del:hover{background:var(--red);color:#fff}
 
-/* netlify mode banner */
-.netlify-banner {
-  background: linear-gradient(135deg, #fff8e6, #fffbf0);
-  border: 1.5px solid #e8c870;
-  border-radius: 12px;
-  padding: 14px 18px;
-  margin: 0 clamp(16px, 5vw, 40px) 20px;
-  max-width: calc(1100px - 0px);
-  margin-left: auto;
-  margin-right: auto;
-  font-size: 13px;
-  color: #7a5e10;
-  display: flex;
-  gap: 12px;
-  align-items: flex-start;
-}
-.netlify-banner svg { flex-shrink: 0; width: 18px; height: 18px; margin-top: 1px; }
-
-/* csv export hint */
-.export-note { font-size: 11px; opacity: 0.6; text-align: center; padding: 0 20px 30px; }
+/* confirm */
+.overlay{position:fixed;inset:0;z-index:9999;background:rgba(9,26,18,.6);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .2s}
+.overlay.open{opacity:1;pointer-events:all}
+.confirm-box{background:#fff;border-radius:18px;padding:36px 32px;max-width:380px;width:100%;box-shadow:0 24px 64px rgba(9,26,18,.2);text-align:center;transform:scale(.94);transition:transform .2s}
+.overlay.open .confirm-box{transform:scale(1)}
+.confirm-icon{font-size:36px;margin-bottom:14px}
+.confirm-title{font-size:18px;font-weight:800;color:var(--g2);margin-bottom:8px}
+.confirm-msg{font-size:14px;color:var(--text2);line-height:1.6;margin-bottom:24px}
+.confirm-btns{display:flex;gap:10px}
+.confirm-btns button{flex:1;padding:13px;border-radius:10px;font-family:'Montserrat',sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;font-weight:700;cursor:pointer;border:none;transition:all .2s}
+.cbtn-cancel{background:var(--cream);color:var(--text2)}
+.cbtn-cancel:hover{background:var(--cream2)}
+.cbtn-ok{background:var(--red);color:#fff}
+.cbtn-ok:hover{background:#a93226}
 </style>
 </head>
 <body>
 
-<!-- LOGIN -->
-<div id="loginScreen">
-  <div class="login-card">
-    <div class="login-logo">Денис & Лена</div>
-    <div class="login-sub">панель управления · гости</div>
-    <label class="login-label" for="pwd">Пароль</label>
-    <input class="login-input" type="password" id="pwd" placeholder="Введите пароль" autocomplete="current-password">
-    <button class="login-btn" onclick="tryLogin()">Войти →</button>
-    <div class="login-error" id="loginErr">Неверный пароль</div>
-    <div class="login-hint">
-      Пароль по умолчанию: <strong>wedding2026</strong><br>
-      Измените его в коде файла admin.html
+<!-- ══ LOGIN SCREEN ══ -->
+<div id="screenLogin" class="screen active">
+  <div class="card card-center">
+    <div class="logo">Денис & Лена</div>
+    <div class="logo-sub">панель управления · гости</div>
+
+    <label class="field-label" for="pwd">Пароль</label>
+    <input class="field-input" type="password" id="pwd" placeholder="Введите пароль" autocomplete="current-password">
+    <div class="error-msg" id="loginErr">Неверный пароль</div>
+    <button class="btn-full btn-primary" onclick="tryLogin()">Войти →</button>
+  </div>
+</div>
+
+<!-- ══ SETUP SCREEN ══ -->
+<div id="screenSetup" class="screen">
+  <div style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px">
+    <div class="card" style="max-width:520px">
+      <div class="logo" style="text-align:center">Первичная настройка</div>
+      <div class="logo-sub" style="text-align:center">подключение к Netlify</div>
+
+      <label class="field-label">Personal Access Token</label>
+      <div class="field-hint">
+        Откройте <a href="https://app.netlify.com/user/applications#personal-access-tokens" target="_blank">netlify.com → User settings → Applications</a> → нажмите «New access token» → скопируйте токен сюда.
+      </div>
+      <input class="field-input mono" type="password" id="setupToken" placeholder="nfp_xxxxxxxxxxxxxxxxxxxx">
+
+      <label class="field-label">Site ID (или название сайта)</label>
+      <div class="field-hint">
+        Откройте ваш сайт на Netlify → <strong>Site settings → General</strong> → скопируйте «Site ID» (выглядит как <code>xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx</code>).
+      </div>
+      <input class="field-input mono" id="setupSiteId" placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx">
+
+      <div class="error-msg" id="setupErr"></div>
+      <button class="btn-full btn-primary" id="setupBtn" onclick="doSetup()">Подключить и войти →</button>
+
+      <div class="step-note">
+        💡 Токен и Site ID сохранятся в браузере — вводить повторно не нужно. Для другого устройства нужно будет ввести один раз снова.
+      </div>
     </div>
   </div>
 </div>
 
-<!-- APP -->
-<div id="app">
+<!-- ══ APP SCREEN ══ -->
+<div id="screenApp" class="screen">
 
   <header class="app-header">
     <div class="header-left">
       <h1>Панель гостей</h1>
-      <p>Денис &amp; Лена · 01.08.2026</p>
+      <p>Netlify Forms · 01.08.2026</p>
     </div>
     <div class="header-actions">
       <button class="btn btn-outline" onclick="exportCSV()">⬇ CSV</button>
-      <button class="btn btn-outline" onclick="refreshData()">↻ Обновить</button>
+      <button class="btn btn-outline" onclick="loadGuests()">↻ Обновить</button>
+      <button class="btn btn-sm-red" onclick="clearSetup()">⚙ Сменить токен</button>
       <button class="btn btn-white" onclick="logout()">Выйти</button>
     </div>
   </header>
 
-  <!-- Stats -->
-  <div class="stats-row" id="statsRow">
-    <div class="stat-card">
-      <div class="stat-num" id="st-total">0</div>
-      <div class="stat-label">всего ответов</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-num" id="st-yes">0</div>
-      <div class="stat-label">придут</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-num" id="st-no">0</div>
-      <div class="stat-label">не смогут</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-num" id="st-bird">0</div>
-      <div class="stat-label">птица</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-num" id="st-meat">0</div>
-      <div class="stat-label">мясо</div>
-    </div>
+  <div class="loading-bar" id="loadingBar"></div>
+
+  <div class="stats-row">
+    <div class="stat-card"><div class="stat-num" id="st-total">—</div><div class="stat-label">всего ответов</div></div>
+    <div class="stat-card"><div class="stat-num" id="st-yes">—</div><div class="stat-label">придут</div></div>
+    <div class="stat-card"><div class="stat-num" id="st-no">—</div><div class="stat-label">не смогут</div></div>
+    <div class="stat-card"><div class="stat-num" id="st-bird">—</div><div class="stat-label">птица</div></div>
+    <div class="stat-card"><div class="stat-num" id="st-meat">—</div><div class="stat-label">мясо</div></div>
   </div>
 
-  <!-- Netlify notice (shown if on Netlify domain) -->
-  <div class="netlify-banner" id="netlifyBanner" style="display:none;">
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-    <span>Сейчас отображаются данные из <strong>локального хранилища браузера</strong>. На Netlify откройте <strong>netlify.com → Forms</strong> чтобы увидеть все ответы гостей с разных устройств.</span>
+  <div class="source-banner">
+    <span>📡 Данные из <strong>Netlify Forms</strong> — актуальны со всех устройств в реальном времени</span>
+    <a href="https://app.netlify.com" target="_blank">Открыть Netlify →</a>
   </div>
 
-  <!-- Controls -->
   <div class="controls-bar">
     <input class="search-box" type="text" id="searchInput" placeholder="Поиск по имени…" oninput="renderTable()">
-    <button class="filter-btn active" data-filter="all" onclick="setFilter('all', this)">Все</button>
-    <button class="filter-btn" data-filter="yes" onclick="setFilter('yes', this)">Придут</button>
-    <button class="filter-btn" data-filter="no" onclick="setFilter('no', this)">Не смогут</button>
+    <button class="filter-btn active" onclick="setFilter('all',this)">Все</button>
+    <button class="filter-btn" onclick="setFilter('yes',this)">Придут</button>
+    <button class="filter-btn" onclick="setFilter('no',this)">Не смогут</button>
   </div>
 
-  <!-- Desktop table -->
   <div class="table-wrap">
-    <table class="guests-table" id="guestsTable">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Имя</th>
-          <th>Придёт?</th>
-          <th>Горячее</th>
-          <th>Напитки</th>
-          <th>Дата ответа</th>
-        </tr>
-      </thead>
+    <table class="guests-table">
+      <thead><tr>
+        <th>#</th><th>Имя</th><th>Придёт?</th><th>Горячее</th><th>Напитки</th><th>Дата ответа</th><th></th>
+      </tr></thead>
       <tbody id="tableBody"></tbody>
     </table>
-
-    <!-- Mobile cards -->
     <div class="mobile-cards" id="mobileCards"></div>
-
-    <div class="empty-state" id="emptyState" style="display:none;">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z"/>
-      </svg>
-      <p>Гостей пока нет</p>
+    <div class="empty-state" id="emptyState" style="display:none">
+      <svg width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0H4"/></svg>
+      <p id="emptyMsg">Ответов пока нет</p>
     </div>
   </div>
+</div>
 
+<!-- ══ CONFIRM DIALOG ══ -->
+<div class="overlay" id="confirmOverlay">
+  <div class="confirm-box">
+    <div class="confirm-icon" id="cIcon">🗑</div>
+    <div class="confirm-title" id="cTitle"></div>
+    <div class="confirm-msg" id="cMsg"></div>
+    <div class="confirm-btns">
+      <button class="cbtn-cancel" onclick="closeConfirm()">Отмена</button>
+      <button class="cbtn-ok" id="cOkBtn">Удалить</button>
+    </div>
+  </div>
 </div>
 
 <script>
-const ADMIN_PASSWORD = 'wedding2026'; // ← смените пароль здесь
-let currentFilter = 'all';
-let allGuests = [];
+// ════════════════════════════════════════════
+//  КОНФИГУРАЦИЯ
+// ════════════════════════════════════════════
+const ADMIN_PASSWORD = 'wedding2026'; // ← смените пароль
+const FORM_NAME      = 'wedding-guests'; // имя формы (атрибут name= в index.html)
+const STORE_TOKEN    = 'nf_token';
+const STORE_SITE     = 'nf_site';
+const STORE_FORM     = 'nf_form_id';
 
-// ── Auth ──
+let allGuests    = [];
+let currentFilter = 'all';
+
+// ════════════════════════════════════════════
+//  ЭКРАНЫ
+// ════════════════════════════════════════════
+function show(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+// ════════════════════════════════════════════
+//  AUTH
+// ════════════════════════════════════════════
 function tryLogin() {
   const val = document.getElementById('pwd').value;
   if (val === ADMIN_PASSWORD) {
-    sessionStorage.setItem('admin_auth', '1');
-    showApp();
+    sessionStorage.setItem('auth', '1');
+    document.getElementById('loginErr').classList.remove('show');
+    afterLogin();
   } else {
-    document.getElementById('loginErr').style.display = 'block';
+    document.getElementById('loginErr').classList.add('show');
     document.getElementById('pwd').style.borderColor = '#c0392b';
   }
 }
 document.getElementById('pwd').addEventListener('keydown', e => { if (e.key === 'Enter') tryLogin(); });
 
 function logout() {
-  sessionStorage.removeItem('admin_auth');
-  document.getElementById('app').style.display = 'none';
-  document.getElementById('loginScreen').style.display = 'flex';
-  document.getElementById('pwd').value = '';
+  sessionStorage.removeItem('auth');
+  show('screenLogin');
 }
 
-function showApp() {
-  document.getElementById('loginScreen').style.display = 'none';
-  document.getElementById('app').style.display = 'block';
-  loadData();
-
-  // Show Netlify hint if on web
-  if (window.location.protocol !== 'file:') {
-    document.getElementById('netlifyBanner').style.display = 'flex';
+function afterLogin() {
+  const token  = localStorage.getItem(STORE_TOKEN);
+  const siteId = localStorage.getItem(STORE_SITE);
+  if (token && siteId) {
+    show('screenApp');
+    loadGuests();
+  } else {
+    show('screenSetup');
   }
 }
 
-if (sessionStorage.getItem('admin_auth') === '1') showApp();
+if (sessionStorage.getItem('auth') === '1') afterLogin();
 
-// ── Data ──
-function loadData() {
-  allGuests = JSON.parse(localStorage.getItem('wedding_guests') || '[]');
+// ════════════════════════════════════════════
+//  SETUP — ввод токена и site ID
+// ════════════════════════════════════════════
+async function doSetup() {
+  const token  = document.getElementById('setupToken').value.trim();
+  const siteId = document.getElementById('setupSiteId').value.trim();
+  const err    = document.getElementById('setupErr');
+  const btn    = document.getElementById('setupBtn');
 
-  // Add demo entries if empty (so admin can see the design)
-  if (allGuests.length === 0) {
-    allGuests = [
-    ];
+  if (!token || !siteId) {
+    err.textContent = 'Заполните оба поля';
+    err.classList.add('show');
+    return;
   }
 
-  renderStats();
-  renderTable();
+  btn.disabled = true;
+  btn.textContent = 'Проверяем…';
+  err.classList.remove('show');
+
+  // Ищем форму по имени
+  try {
+    const res = await netlifyFetch(`/api/v1/sites/${siteId}/forms`, token);
+    if (!res.ok) throw new Error(`Ошибка ${res.status}: проверьте Site ID и токен`);
+    const forms = await res.json();
+    const form  = forms.find(f => f.name === FORM_NAME);
+    if (!form) throw new Error(`Форма "${FORM_NAME}" не найдена. Убедитесь, что хотя бы один гость заполнил анкету.`);
+
+    localStorage.setItem(STORE_TOKEN, token);
+    localStorage.setItem(STORE_SITE,  siteId);
+    localStorage.setItem(STORE_FORM,  form.id);
+
+    show('screenApp');
+    loadGuests();
+  } catch(e) {
+    err.textContent = e.message;
+    err.classList.add('show');
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Подключить и войти →';
+  }
 }
 
-function refreshData() {
-  loadData();
+function clearSetup() {
+  localStorage.removeItem(STORE_TOKEN);
+  localStorage.removeItem(STORE_SITE);
+  localStorage.removeItem(STORE_FORM);
+  show('screenSetup');
 }
 
+// ════════════════════════════════════════════
+//  NETLIFY API
+// ════════════════════════════════════════════
+function netlifyFetch(path, token, options={}) {
+  return fetch('https://api.netlify.com' + path, {
+    ...options,
+    headers: {
+      'Authorization': 'Bearer ' + (token || localStorage.getItem(STORE_TOKEN)),
+      'Content-Type': 'application/json',
+      ...(options.headers || {})
+    }
+  });
+}
+
+async function loadGuests() {
+  setLoading(true);
+  const formId = localStorage.getItem(STORE_FORM);
+  const siteId = localStorage.getItem(STORE_SITE);
+
+  try {
+    // Если form_id ещё не известен — найти
+    let fid = formId;
+    if (!fid) {
+      const r = await netlifyFetch(`/api/v1/sites/${siteId}/forms`);
+      const forms = await r.json();
+      const form = forms.find(f => f.name === FORM_NAME);
+      if (!form) throw new Error('Форма не найдена');
+      fid = form.id;
+      localStorage.setItem(STORE_FORM, fid);
+    }
+
+    // Загружаем все сабмишены (до 1000, достаточно для свадьбы)
+    const r2 = await netlifyFetch(`/api/v1/forms/${fid}/submissions?per_page=1000`);
+    if (!r2.ok) throw new Error('Ошибка загрузки: ' + r2.status);
+    const raw = await r2.json();
+
+    // Нормализуем поля (Netlify хранит данные в submission.data)
+    allGuests = raw.map(s => ({
+      id:         s.id,
+      ts:         new Date(s.created_at).toLocaleString('ru'),
+      name:       s.data?.name       || '',
+      attendance: s.data?.attendance || '',
+      food:       s.data?.food       || '',
+      drinks:     Array.isArray(s.data?.drinks)
+                    ? s.data.drinks.join(', ')
+                    : (s.data?.drinks || '')
+    }));
+
+    renderStats();
+    renderTable();
+  } catch(e) {
+    showEmpty('Ошибка загрузки: ' + e.message);
+  } finally {
+    setLoading(false);
+  }
+}
+
+async function deleteGuest(netlifyId, name) {
+  try {
+    const r = await netlifyFetch(`/api/v1/submissions/${netlifyId}`, null, { method: 'DELETE' });
+    if (!r.ok) throw new Error('Ошибка удаления: ' + r.status);
+    allGuests = allGuests.filter(g => g.id !== netlifyId);
+    renderStats();
+    renderTable();
+  } catch(e) {
+    alert('Не удалось удалить: ' + e.message);
+  }
+}
+
+// ════════════════════════════════════════════
+//  RENDER
+// ════════════════════════════════════════════
 function renderStats() {
-  const yes = allGuests.filter(g => g.attendance.includes('Да')).length;
-  const no = allGuests.filter(g => g.attendance.includes('не смогу')).length;
-  const bird = allGuests.filter(g => g.food === 'Птица').length;
-  const meat = allGuests.filter(g => g.food === 'Мясо').length;
-
+  const yes  = allGuests.filter(g => g.attendance.includes('Да')).length;
+  const no   = allGuests.filter(g => g.attendance.includes('не смогу')).length;
   document.getElementById('st-total').textContent = allGuests.length;
-  document.getElementById('st-yes').textContent = yes;
-  document.getElementById('st-no').textContent = no;
-  document.getElementById('st-bird').textContent = bird;
-  document.getElementById('st-meat').textContent = meat;
+  document.getElementById('st-yes').textContent   = yes;
+  document.getElementById('st-no').textContent    = no;
+  document.getElementById('st-bird').textContent  = allGuests.filter(g => g.food === 'Птица').length;
+  document.getElementById('st-meat').textContent  = allGuests.filter(g => g.food === 'Мясо').length;
 }
 
 function setFilter(f, btn) {
@@ -568,85 +449,93 @@ function setFilter(f, btn) {
 
 function renderTable() {
   const q = document.getElementById('searchInput').value.toLowerCase();
-
-  let data = allGuests.filter(g => {
-    const matchSearch = !q || g.name.toLowerCase().includes(q);
-    const matchFilter =
-      currentFilter === 'all' ||
-      (currentFilter === 'yes' && g.attendance.includes('Да')) ||
-      (currentFilter === 'no' && g.attendance.includes('не смогу'));
-    return matchSearch && matchFilter;
+  const data = allGuests.filter(g => {
+    const ms = !q || g.name.toLowerCase().includes(q);
+    const mf = currentFilter === 'all'
+      || (currentFilter === 'yes' && g.attendance.includes('Да'))
+      || (currentFilter === 'no'  && g.attendance.includes('не смогу'));
+    return ms && mf;
   });
 
-  const tbody = document.getElementById('tableBody');
-  const cards = document.getElementById('mobileCards');
-  const empty = document.getElementById('emptyState');
+  const tbody  = document.getElementById('tableBody');
+  const mcards = document.getElementById('mobileCards');
+  tbody.innerHTML = mcards.innerHTML = '';
 
-  tbody.innerHTML = '';
-  cards.innerHTML = '';
-
-  if (data.length === 0) {
-    empty.style.display = 'block';
-    return;
-  }
-  empty.style.display = 'none';
+  if (!data.length) { showEmpty('Ничего не найдено'); return; }
+  document.getElementById('emptyState').style.display = 'none';
 
   data.forEach((g, i) => {
     const isYes = g.attendance.includes('Да');
-    const chipClass = isYes ? 'chip-yes' : 'chip-no';
-    const chipText = isYes ? '✓ Придёт' : '✗ Не сможет';
+    const cls   = isYes ? 'chip-yes' : 'chip-no';
+    const lbl   = isYes ? '✓ Придёт' : '✗ Не сможет';
 
-    // Table row
     const tr = document.createElement('tr');
     tr.innerHTML = `
-      <td style="color:#aaa;font-size:13px;width:32px;">${i+1}</td>
-      <td class="td-name">${escHtml(g.name)}</td>
-      <td><span class="chip ${chipClass}">${chipText}</span></td>
-      <td>${g.food ? `<span class="chip chip-food">${escHtml(g.food)}</span>` : '<span style="opacity:.3">—</span>'}</td>
-      <td><div class="drinks-list">${g.drinks ? escHtml(g.drinks) : '<span style="opacity:.3">—</span>'}</div></td>
-      <td class="td-ts">${escHtml(g.ts)}</td>
+      <td style="color:#aaa;font-size:13px;width:28px">${i+1}</td>
+      <td class="td-name">${esc(g.name)}</td>
+      <td><span class="chip ${cls}">${lbl}</span></td>
+      <td>${g.food ? `<span class="chip chip-food">${esc(g.food)}</span>` : '<span style="opacity:.3">—</span>'}</td>
+      <td><div class="drinks-list">${g.drinks ? esc(g.drinks) : '<span style="opacity:.3">—</span>'}</div></td>
+      <td class="td-ts">${esc(g.ts)}</td>
+      <td><button class="btn-del" onclick="confirmDel('${g.id}','${esc(g.name)}')" title="Удалить">✕</button></td>
     `;
     tbody.appendChild(tr);
 
-    // Mobile card
     const card = document.createElement('div');
     card.className = 'm-card';
     card.innerHTML = `
-      <div class="m-card-name">${escHtml(g.name)}</div>
-      <div class="m-card-row">
-        <div class="m-card-key">Статус</div>
-        <span class="chip ${chipClass}">${chipText}</span>
-      </div>
-      ${g.food ? `<div class="m-card-row"><div class="m-card-key">Горячее</div><span class="chip chip-food">${escHtml(g.food)}</span></div>` : ''}
-      ${g.drinks ? `<div class="m-card-row"><div class="m-card-key">Напитки</div><div>${escHtml(g.drinks)}</div></div>` : ''}
-      <div class="m-card-ts">${escHtml(g.ts)}</div>
+      <button class="m-card-del" onclick="confirmDel('${g.id}','${esc(g.name)}')" title="Удалить">✕</button>
+      <div class="m-card-name">${esc(g.name)}</div>
+      <div class="m-card-row"><div class="m-card-key">Статус</div><span class="chip ${cls}">${lbl}</span></div>
+      ${g.food   ? `<div class="m-card-row"><div class="m-card-key">Горячее</div><span class="chip chip-food">${esc(g.food)}</span></div>` : ''}
+      ${g.drinks ? `<div class="m-card-row"><div class="m-card-key">Напитки</div><div style="font-size:13px">${esc(g.drinks)}</div></div>` : ''}
+      <div class="m-card-ts">${esc(g.ts)}</div>
     `;
-    cards.appendChild(card);
+    mcards.appendChild(card);
   });
 }
 
-function escHtml(s) {
-  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+function showEmpty(msg) {
+  document.getElementById('emptyState').style.display = 'block';
+  document.getElementById('emptyMsg').textContent = msg;
 }
 
-// ── CSV Export ──
+function setLoading(on) {
+  document.getElementById('loadingBar').classList.toggle('show', on);
+}
+
+// ════════════════════════════════════════════
+//  CONFIRM
+// ════════════════════════════════════════════
+function confirmDel(id, name) {
+  document.getElementById('cIcon').textContent  = '🗑';
+  document.getElementById('cTitle').textContent = 'Удалить гостя?';
+  document.getElementById('cMsg').innerHTML     = `Запись <strong>${esc(name)}</strong> будет удалена из Netlify безвозвратно.`;
+  document.getElementById('cOkBtn').textContent = 'Удалить';
+  document.getElementById('cOkBtn').onclick = () => { deleteGuest(id, name); closeConfirm(); };
+  openConfirm();
+}
+
+function openConfirm()  { document.getElementById('confirmOverlay').classList.add('open'); }
+function closeConfirm() { document.getElementById('confirmOverlay').classList.remove('open'); }
+document.getElementById('confirmOverlay').addEventListener('click', e => { if (e.target.id === 'confirmOverlay') closeConfirm(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeConfirm(); });
+
+// ════════════════════════════════════════════
+//  CSV
+// ════════════════════════════════════════════
 function exportCSV() {
-  const header = ['#','Имя','Придёт','Горячее','Напитки','Время ответа'];
-  const rows = allGuests.map((g,i) => [
-    i+1, g.name, g.attendance, g.food, g.drinks, g.ts
-  ]);
-
-  const csv = [header, ...rows]
-    .map(r => r.map(c => `"${String(c).replace(/"/g,'""')}"`).join(';'))
-    .join('\n');
-
-  const blob = new Blob(['\ufeff' + csv], { type: 'text/csv;charset=utf-8;' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = `wedding-guests-${new Date().toLocaleDateString('ru')}.csv`;
+  const rows = [['#','Имя','Придёт','Горячее','Напитки','Время'], ...allGuests.map((g,i) => [i+1,g.name,g.attendance,g.food,g.drinks,g.ts])];
+  const csv  = rows.map(r => r.map(c => `"${String(c||'').replace(/"/g,'""')}"`).join(';')).join('\n');
+  const a    = Object.assign(document.createElement('a'), { href: URL.createObjectURL(new Blob(['\ufeff'+csv], {type:'text/csv;charset=utf-8'})), download: `guests-${new Date().toLocaleDateString('ru')}.csv` });
   a.click();
-  URL.revokeObjectURL(url);
+}
+
+// ════════════════════════════════════════════
+//  UTILS
+// ════════════════════════════════════════════
+function esc(s) {
+  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 </script>
 </body>
