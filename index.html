@@ -304,7 +304,7 @@ footer>*{position:relative;z-index:1}
     <!-- 2 фото: жених и невеста -->
     <div class="photo-grid">
       <div class="ph">
-        <img src="images/5.jpg" alt="">
+        <img src="images/2.jpg" alt="">
         <span class="ph-label">жених</span>
       </div>
       <div class="ph">
@@ -500,7 +500,8 @@ footer>*{position:relative;z-index:1}
 
 document.querySelectorAll('.opt').forEach(opt=>{
   const inp=opt.querySelector('input'),name=inp.name,isCheck=inp.type==='checkbox';
-  opt.addEventListener('click',()=>{
+  opt.addEventListener('click',(e)=>{
+    e.preventDefault();
     if(!isCheck){document.querySelectorAll(`.opt input[name="${name}"]`).forEach(s=>{s.closest('.opt').classList.remove('active');s.checked=false});}
     if(isCheck){opt.classList.toggle('active');inp.checked=!inp.checked;}
     else{opt.classList.add('active');inp.checked=true;}
