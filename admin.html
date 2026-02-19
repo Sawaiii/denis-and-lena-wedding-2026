@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Админ — Гости Денис & Лена</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --g1: #0d2218;
+  --g2: #1b3a2d;
+  --g3: #2a5540;
+  --g4: #3d7a5a;
+  --pale: #a8c5b5;
+  --cream: #f4ede0;
+  --cream2: #ede3d0;
+  --gold: #c9a84c;
+  --text: #152018;
+  --text2: #2e4a38;
+  --red: #c0392b;
+  --red-light: #fdf0ee;
+  --green-chip: #eaf4ef;
+  --green-text: #1b5e38;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background:
+    radial-gradient(ellipse 70% 50% at 80% 0%, #2a554020 0%, transparent 60%),
+    radial-gradient(ellipse 60% 60% at 0% 100%, #1b3a2d15 0%, transparent 60%),
+    var(--cream);
+  min-height: 100vh;
+  color: var(--text);
+}
+
+/* ── LOGIN ── */
+#loginScreen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.login-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 48px 40px;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0 24px 64px rgba(13,34,24,0.12);
+  border: 1px solid rgba(168,197,181,0.3);
+  text-align: center;
+}
+
+.login-logo {
+  font-family: 'Dancing Script', cursive;
+  font-size: 36px;
+  color: var(--g2);
+  margin-bottom: 6px;
+}
+
+.login-sub {
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--text2);
+  opacity: 0.6;
+  margin-bottom: 36px;
+}
+
+.login-label {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--g2);
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+.login-input {
+  width: 100%;
+  padding: 13px 16px;
+  border: 1.5px solid var(--pale);
+  border-radius: 10px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 15px;
+  color: var(--text);
+  background: var(--cream);
+  outline: none;
+  transition: border-color 0.2s;
+  margin-bottom: 16px;
+  -webkit-appearance: none;
+}
+.login-input:focus { border-color: var(--g3); }
+
+.login-btn {
+  width: 100%;
+  padding: 15px;
+  background: var(--g2);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+.login-btn:hover { background: var(--g3); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(27,58,45,0.25); }
+
+.login-error {
+  color: var(--red);
+  font-size: 12px;
+  margin-top: 10px;
+  display: none;
+}
+
+.login-hint {
+  margin-top: 20px;
+  font-size: 12px;
+  color: var(--text2);
+  opacity: 0.55;
+  line-height: 1.6;
+}
+
+/* ── APP ── */
+#app { display: none; }
+
+/* header */
+.app-header {
+  background:
+    radial-gradient(ellipse 80% 80% at 20% 0%, #3d7a5a 0%, transparent 55%),
+    radial-gradient(ellipse 60% 60% at 80% 100%, #2a5540 0%, transparent 50%),
+    var(--g2);
+  color: #fff;
+  padding: 24px clamp(16px, 5vw, 40px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-left h1 {
+  font-family: 'Dancing Script', cursive;
+  font-size: clamp(22px, 5vw, 30px);
+  line-height: 1;
+  margin-bottom: 2px;
+}
+
+.header-left p {
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--pale);
+  opacity: 0.8;
+}
+
+.header-actions { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+
+.btn {
+  padding: 9px 18px;
+  border-radius: 8px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s;
+}
+.btn-outline {
+  background: transparent;
+  border: 1.5px solid rgba(255,255,255,0.25);
+  color: #fff;
+}
+.btn-outline:hover { background: rgba(255,255,255,0.1); }
+.btn-white {
+  background: #fff;
+  color: var(--g2);
+}
+.btn-white:hover { background: var(--cream); }
+
+/* stats row */
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 14px;
+  padding: clamp(20px, 4vw, 32px) clamp(16px, 5vw, 40px);
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.stat-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 20px 22px;
+  border: 1px solid rgba(168,197,181,0.25);
+  box-shadow: 0 4px 16px rgba(13,34,24,0.06);
+}
+
+.stat-num {
+  font-size: clamp(28px, 5vw, 38px);
+  font-weight: 800;
+  color: var(--g2);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.stat-label {
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text2);
+  opacity: 0.6;
+  font-weight: 600;
+}
+
+/* filters */
+.controls-bar {
+  padding: 0 clamp(16px, 5vw, 40px) 20px;
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.search-box {
+  flex: 1;
+  min-width: 180px;
+  padding: 11px 16px;
+  border: 1.5px solid var(--pale);
+  border-radius: 10px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  color: var(--text);
+  background: #fff;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.search-box:focus { border-color: var(--g3); }
+
+.filter-btn {
+  padding: 11px 18px;
+  border-radius: 10px;
+  border: 1.5px solid var(--pale);
+  background: #fff;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text2);
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.filter-btn:hover, .filter-btn.active {
+  background: var(--g2);
+  border-color: var(--g2);
+  color: #fff;
+}
+
+/* table */
+.table-wrap {
+  padding: 0 clamp(16px, 5vw, 40px) 60px;
+  max-width: 1100px;
+  margin: 0 auto;
+  overflow-x: auto;
+}
+
+.guests-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 8px;
+  min-width: 600px;
+}
+
+.guests-table thead th {
+  font-size: 10px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--text2);
+  opacity: 0.55;
+  padding: 0 16px 6px;
+  text-align: left;
+}
+
+.guests-table tbody tr {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(13,34,24,0.05);
+  transition: box-shadow 0.2s, transform 0.15s;
+}
+.guests-table tbody tr:hover {
+  box-shadow: 0 6px 20px rgba(13,34,24,0.1);
+  transform: translateY(-1px);
+}
+
+.guests-table tbody td {
+  padding: 16px 16px;
+  font-size: 14px;
+  vertical-align: middle;
+}
+
+.guests-table tbody td:first-child { border-radius: 12px 0 0 12px; }
+.guests-table tbody td:last-child { border-radius: 0 12px 12px 0; }
+
+.td-name { font-weight: 700; color: var(--g2); }
+.td-ts { font-size: 12px; color: var(--text2); opacity: 0.55; }
+
+.chip {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+.chip-yes { background: var(--green-chip); color: var(--green-text); }
+.chip-no { background: var(--red-light); color: var(--red); }
+.chip-food { background: rgba(201,168,76,0.12); color: #7a5e10; }
+
+.drinks-list { font-size: 12px; color: var(--text2); line-height: 1.7; max-width: 200px; }
+
+/* empty state */
+.empty-state {
+  text-align: center;
+  padding: 80px 20px;
+  color: var(--text2);
+  opacity: 0.5;
+}
+.empty-state svg { width: 48px; height: 48px; margin: 0 auto 16px; display: block; }
+.empty-state p { font-size: 15px; font-weight: 500; }
+
+/* mobile cards */
+@media (max-width: 640px) {
+  .table-wrap { padding: 0 16px 60px; overflow-x: visible; }
+  .guests-table { display: none; }
+  .mobile-cards { display: flex; flex-direction: column; gap: 12px; }
+}
+@media (min-width: 641px) {
+  .mobile-cards { display: none; }
+}
+
+.m-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 18px;
+  box-shadow: 0 2px 10px rgba(13,34,24,0.07);
+}
+.m-card-name { font-weight: 700; color: var(--g2); font-size: 16px; margin-bottom: 10px; }
+.m-card-row { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 7px; font-size: 13px; }
+.m-card-key { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 700; color: var(--text2); opacity: 0.5; min-width: 70px; margin-top: 2px; }
+.m-card-ts { font-size: 11px; color: var(--text2); opacity: 0.45; margin-top: 10px; }
+
+/* netlify mode banner */
+.netlify-banner {
+  background: linear-gradient(135deg, #fff8e6, #fffbf0);
+  border: 1.5px solid #e8c870;
+  border-radius: 12px;
+  padding: 14px 18px;
+  margin: 0 clamp(16px, 5vw, 40px) 20px;
+  max-width: calc(1100px - 0px);
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 13px;
+  color: #7a5e10;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+.netlify-banner svg { flex-shrink: 0; width: 18px; height: 18px; margin-top: 1px; }
+
+/* csv export hint */
+.export-note { font-size: 11px; opacity: 0.6; text-align: center; padding: 0 20px 30px; }
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="loginScreen">
+  <div class="login-card">
+    <div class="login-logo">Денис & Лена</div>
+    <div class="login-sub">панель управления · гости</div>
+    <label class="login-label" for="pwd">Пароль</label>
+    <input class="login-input" type="password" id="pwd" placeholder="Введите пароль" autocomplete="current-password">
+    <button class="login-btn" onclick="tryLogin()">Войти →</button>
+    <div class="login-error" id="loginErr">Неверный пароль</div>
+    <div class="login-hint">
+      Пароль по умолчанию: <strong>wedding2026</strong><br>
+      Измените его в коде файла admin.html
+    </div>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app">
+
+  <header class="app-header">
+    <div class="header-left">
+      <h1>Панель гостей</h1>
+      <p>Денис &amp; Лена · 01.08.2026</p>
+    </div>
+    <div class="header-actions">
+      <button class="btn btn-outline" onclick="exportCSV()">⬇ CSV</button>
+      <button class="btn btn-outline" onclick="refreshData()">↻ Обновить</button>
+      <button class="btn btn-white" onclick="logout()">Выйти</button>
+    </div>
+  </header>
+
+  <!-- Stats -->
+  <div class="stats-row" id="statsRow">
+    <div class="stat-card">
+      <div class="stat-num" id="st-total">0</div>
+      <div class="stat-label">всего ответов</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" id="st-yes">0</div>
+      <div class="stat-label">придут</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" id="st-no">0</div>
+      <div class="stat-label">не смогут</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" id="st-bird">0</div>
+      <div class="stat-label">птица</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" id="st-meat">0</div>
+      <div class="stat-label">мясо</div>
+    </div>
+  </div>
+
+  <!-- Netlify notice (shown if on Netlify domain) -->
+  <div class="netlify-banner" id="netlifyBanner" style="display:none;">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+    <span>Сейчас отображаются данные из <strong>локального хранилища браузера</strong>. На Netlify откройте <strong>netlify.com → Forms</strong> чтобы увидеть все ответы гостей с разных устройств.</span>
+  </div>
+
+  <!-- Controls -->
+  <div class="controls-bar">
+    <input class="search-box" type="text" id="searchInput" placeholder="Поиск по имени…" oninput="renderTable()">
+    <button class="filter-btn active" data-filter="all" onclick="setFilter('all', this)">Все</button>
+    <button class="filter-btn" data-filter="yes" onclick="setFilter('yes', this)">Придут</button>
+    <button class="filter-btn" data-filter="no" onclick="setFilter('no', this)">Не смогут</button>
+  </div>
+
+  <!-- Desktop table -->
+  <div class="table-wrap">
+    <table class="guests-table" id="guestsTable">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Имя</th>
+          <th>Придёт?</th>
+          <th>Горячее</th>
+          <th>Напитки</th>
+          <th>Дата ответа</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody"></tbody>
+    </table>
+
+    <!-- Mobile cards -->
+    <div class="mobile-cards" id="mobileCards"></div>
+
+    <div class="empty-state" id="emptyState" style="display:none;">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z"/>
+      </svg>
+      <p>Гостей пока нет</p>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const ADMIN_PASSWORD = 'wedding2026'; // ← смените пароль здесь
+let currentFilter = 'all';
+let allGuests = [];
+
+// ── Auth ──
+function tryLogin() {
+  const val = document.getElementById('pwd').value;
+  if (val === ADMIN_PASSWORD) {
+    sessionStorage.setItem('admin_auth', '1');
+    showApp();
+  } else {
+    document.getElementById('loginErr').style.display = 'block';
+    document.getElementById('pwd').style.borderColor = '#c0392b';
+  }
+}
+document.getElementById('pwd').addEventListener('keydown', e => { if (e.key === 'Enter') tryLogin(); });
+
+function logout() {
+  sessionStorage.removeItem('admin_auth');
+  document.getElementById('app').style.display = 'none';
+  document.getElementById('loginScreen').style.display = 'flex';
+  document.getElementById('pwd').value = '';
+}
+
+function showApp() {
+  document.getElementById('loginScreen').style.display = 'none';
+  document.getElementById('app').style.display = 'block';
+  loadData();
+
+  // Show Netlify hint if on web
+  if (window.location.protocol !== 'file:') {
+    document.getElementById('netlifyBanner').style.display = 'flex';
+  }
+}
+
+if (sessionStorage.getItem('admin_auth') === '1') showApp();
+
+// ── Data ──
+function loadData() {
+  allGuests = JSON.parse(localStorage.getItem('wedding_guests') || '[]');
+
+  // Add demo entries if empty (so admin can see the design)
+  if (allGuests.length === 0) {
+    allGuests = [
+    ];
+  }
+
+  renderStats();
+  renderTable();
+}
+
+function refreshData() {
+  loadData();
+}
+
+function renderStats() {
+  const yes = allGuests.filter(g => g.attendance.includes('Да')).length;
+  const no = allGuests.filter(g => g.attendance.includes('не смогу')).length;
+  const bird = allGuests.filter(g => g.food === 'Птица').length;
+  const meat = allGuests.filter(g => g.food === 'Мясо').length;
+
+  document.getElementById('st-total').textContent = allGuests.length;
+  document.getElementById('st-yes').textContent = yes;
+  document.getElementById('st-no').textContent = no;
+  document.getElementById('st-bird').textContent = bird;
+  document.getElementById('st-meat').textContent = meat;
+}
+
+function setFilter(f, btn) {
+  currentFilter = f;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderTable();
+}
+
+function renderTable() {
+  const q = document.getElementById('searchInput').value.toLowerCase();
+
+  let data = allGuests.filter(g => {
+    const matchSearch = !q || g.name.toLowerCase().includes(q);
+    const matchFilter =
+      currentFilter === 'all' ||
+      (currentFilter === 'yes' && g.attendance.includes('Да')) ||
+      (currentFilter === 'no' && g.attendance.includes('не смогу'));
+    return matchSearch && matchFilter;
+  });
+
+  const tbody = document.getElementById('tableBody');
+  const cards = document.getElementById('mobileCards');
+  const empty = document.getElementById('emptyState');
+
+  tbody.innerHTML = '';
+  cards.innerHTML = '';
+
+  if (data.length === 0) {
+    empty.style.display = 'block';
+    return;
+  }
+  empty.style.display = 'none';
+
+  data.forEach((g, i) => {
+    const isYes = g.attendance.includes('Да');
+    const chipClass = isYes ? 'chip-yes' : 'chip-no';
+    const chipText = isYes ? '✓ Придёт' : '✗ Не сможет';
+
+    // Table row
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td style="color:#aaa;font-size:13px;width:32px;">${i+1}</td>
+      <td class="td-name">${escHtml(g.name)}</td>
+      <td><span class="chip ${chipClass}">${chipText}</span></td>
+      <td>${g.food ? `<span class="chip chip-food">${escHtml(g.food)}</span>` : '<span style="opacity:.3">—</span>'}</td>
+      <td><div class="drinks-list">${g.drinks ? escHtml(g.drinks) : '<span style="opacity:.3">—</span>'}</div></td>
+      <td class="td-ts">${escHtml(g.ts)}</td>
+    `;
+    tbody.appendChild(tr);
+
+    // Mobile card
+    const card = document.createElement('div');
+    card.className = 'm-card';
+    card.innerHTML = `
+      <div class="m-card-name">${escHtml(g.name)}</div>
+      <div class="m-card-row">
+        <div class="m-card-key">Статус</div>
+        <span class="chip ${chipClass}">${chipText}</span>
+      </div>
+      ${g.food ? `<div class="m-card-row"><div class="m-card-key">Горячее</div><span class="chip chip-food">${escHtml(g.food)}</span></div>` : ''}
+      ${g.drinks ? `<div class="m-card-row"><div class="m-card-key">Напитки</div><div>${escHtml(g.drinks)}</div></div>` : ''}
+      <div class="m-card-ts">${escHtml(g.ts)}</div>
+    `;
+    cards.appendChild(card);
+  });
+}
+
+function escHtml(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ── CSV Export ──
+function exportCSV() {
+  const header = ['#','Имя','Придёт','Горячее','Напитки','Время ответа'];
+  const rows = allGuests.map((g,i) => [
+    i+1, g.name, g.attendance, g.food, g.drinks, g.ts
+  ]);
+
+  const csv = [header, ...rows]
+    .map(r => r.map(c => `"${String(c).replace(/"/g,'""')}"`).join(';'))
+    .join('\n');
+
+  const blob = new Blob(['\ufeff' + csv], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `wedding-guests-${new Date().toLocaleDateString('ru')}.csv`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+</script>
+</body>
+</html>
