@@ -3,17 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#1b3a2d">
+<meta name="theme-color" content="#142400">
 <title>Денис & Лена — 01.08.2026</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400;1,600&family=Dancing+Script:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --d1: #091a12; --d2: #0f2318; --d3: #1b3a2d; --d4: #2a5540; --d5: #3d7a5a;
-  --pale: #a8c5b5;
-  --c1: #f9f3e8; --c2: #f1e8d6; --c3: #e8ddc8;
-  --gold: #c9a84c; --gold2: #e8c870;
-  --text: #152018; --text2: #2e4a38; --white: #fff;
+  --d1: #0a1400; --d2: #142400; --d3: #142400; --d4: #305700; --d5: #4c9141;
+  --pale: #a8c5a0;
+  --c1: #fbe7ca; --c2: #f5ddb5; --c3: #edd4a8;
+  --gold: #582f11; --gold2: #7a4a20;
+  --text: #142400; --text2: #305700; --white: #fff;
+  --beige: #fbe7ca; --dk-green: #142400; --olive: #305700; --lt-green: #4c9141; --brown: #582f11;
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-tap-highlight-color:transparent;overflow-x:hidden}
@@ -22,29 +23,29 @@ body{font-family:'Montserrat',sans-serif;color:var(--text);overflow-x:hidden}
 /* ── ZONES ── */
 .zone-dark{
   background:
-    radial-gradient(ellipse 80% 50% at 10% 15%,#2a554432 0%,transparent 55%),
-    radial-gradient(ellipse 60% 60% at 90% 55%,#3d7a5a1c 0%,transparent 50%),
-    linear-gradient(175deg,var(--d1) 0%,var(--d3) 45%,#0f2318 100%);
+    radial-gradient(ellipse 80% 50% at 10% 15%,#30570044 0%,transparent 55%),
+    radial-gradient(ellipse 60% 60% at 90% 55%,#4c91411c 0%,transparent 50%),
+    linear-gradient(175deg,#0a1400 0%,#142400 45%,#142400 100%);
   position:relative;
 }
 .zone-cream{
   position:relative;
   background:
-    radial-gradient(ellipse 80% 60% at -10% 20%,#2a554412 0%,transparent 50%),
-    radial-gradient(ellipse 60% 80% at 110% 70%,#1b3a2d0e 0%,transparent 50%),
-    var(--c1);
+    radial-gradient(ellipse 80% 60% at -10% 20%,#14240012 0%,transparent 50%),
+    radial-gradient(ellipse 60% 80% at 110% 70%,#14240010 0%,transparent 50%),
+    #fbe7ca;
 }
 .zone-cream::before{
   content:'';position:absolute;
   top:8%;left:-15%;width:55%;height:35%;
-  background:radial-gradient(ellipse,#3d7a5a0a 0%,transparent 70%);
+  background:radial-gradient(ellipse,#4c91410a 0%,transparent 70%);
   border-radius:50%;pointer-events:none;
   animation:bA 18s ease-in-out infinite alternate;
 }
 .zone-cream::after{
   content:'';position:absolute;
   top:52%;right:-10%;width:50%;height:30%;
-  background:radial-gradient(ellipse,#c9a84c08 0%,transparent 70%);
+  background:radial-gradient(ellipse,#58201108 0%,transparent 70%);
   border-radius:50%;pointer-events:none;
   animation:bB 22s ease-in-out infinite alternate;
 }
@@ -52,15 +53,15 @@ body{font-family:'Montserrat',sans-serif;color:var(--text);overflow-x:hidden}
 @keyframes bB{from{transform:translate(0,0) scale(1);opacity:.7}to{transform:translate(-6%,-8%) scale(1.2);opacity:1}}
 .zone-bottom{
   background:
-    radial-gradient(ellipse 70% 60% at 80% 60%,#2a554438 0%,transparent 55%),
-    radial-gradient(ellipse 80% 80% at 10% 100%,#3d7a5a20 0%,transparent 55%),
-    linear-gradient(175deg,#0f2318 0%,var(--d1) 50%,var(--d3) 100%);
+    radial-gradient(ellipse 70% 60% at 80% 60%,#30570038 0%,transparent 55%),
+    radial-gradient(ellipse 80% 80% at 10% 100%,#4c914120 0%,transparent 55%),
+    linear-gradient(175deg,#142400 0%,#142400 50%,#1a3000 100%);
   position:relative;overflow:hidden;
 }
 
 /* ── TICKER ── */
 .ticker{
-  background:var(--d1);color:var(--pale);
+  background:#142400;color:#a8c5a0;
   font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:700;
   padding:10px 0;overflow:hidden;white-space:nowrap;position:relative;z-index:10;
 }
@@ -95,7 +96,7 @@ body{font-family:'Montserrat',sans-serif;color:var(--text);overflow-x:hidden}
   position:relative;
 }
 .ph{
-  background:linear-gradient(135deg,#2a5540 0%,#1b3a2d 100%);
+  background:linear-gradient(135deg,#305700 0%,#142400 100%);
   border-radius:12px;
   border:1.5px solid rgba(255,255,255,0.08);
   aspect-ratio:3/4;
@@ -104,6 +105,12 @@ body{font-family:'Montserrat',sans-serif;color:var(--text);overflow-x:hidden}
   overflow:hidden;position:relative;cursor:pointer;
 }
 .ph img{width:100%;height:100%;object-fit:cover;border-radius:10px}
+.ph-big{
+  width:100%;max-width:480px;
+  aspect-ratio:4/3;
+  margin-top:10px;margin-bottom:0;
+  border-radius:16px;
+}
 .ph-label{
   position:absolute;bottom:10px;left:50%;transform:translateX(-50%);
   font-size:9px;letter-spacing:2px;text-transform:uppercase;
@@ -122,12 +129,12 @@ body{font-family:'Montserrat',sans-serif;color:var(--text);overflow-x:hidden}
 .section{padding:clamp(56px,10vw,96px) clamp(20px,6vw,56px);position:relative;z-index:1}
 .section-inner{max-width:720px;margin:0 auto}
 
-.eyebrow{font-size:10px;letter-spacing:4px;text-transform:uppercase;font-weight:700;color:var(--d4);display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.eyebrow{font-size:10px;letter-spacing:4px;text-transform:uppercase;font-weight:700;color:#305700;display:flex;align-items:center;gap:12px;margin-bottom:14px}
 .eyebrow::after{content:'';flex:1;height:1px;background:currentColor;opacity:.25}
 .eyebrow.light{color:var(--pale)}
-.heading{font-family:'Dancing Script',cursive;font-size:clamp(34px,7vw,58px);color:var(--d3);line-height:1.1}
+.heading{font-family:'Dancing Script',cursive;font-size:clamp(34px,7vw,58px);color:#142400;line-height:1.1}
 .heading.light{color:var(--white)}
-.rule{width:48px;height:3px;background:linear-gradient(90deg,var(--pale),var(--d4));border-radius:3px;margin:18px 0 28px}
+.rule{width:48px;height:3px;background:linear-gradient(90deg,#a8c5a0,#305700);border-radius:3px;margin:18px 0 28px}
 .rule.light{background:linear-gradient(90deg,rgba(255,255,255,.3),rgba(255,255,255,.7))}
 .body-text{font-family:'Cormorant Garamond',serif;font-size:clamp(17px,3.5vw,21px);line-height:1.75;color:var(--text2)}
 .mb24{margin-bottom:24px}
@@ -138,7 +145,7 @@ body{font-family:'Montserrat',sans-serif;color:var(--text);overflow-x:hidden}
 .address-block{font-size:clamp(15px,3.5vw,18px);line-height:1.9;color:var(--pale);font-weight:400;margin-bottom:36px}
 .map-placeholder{cursor:pointer;
   width:100%;aspect-ratio:16/8;
-  background:linear-gradient(135deg,#2a5540 0%,#1b3a2d 100%);
+  background:linear-gradient(135deg,#305700 0%,#142400 100%);
   border-radius:14px;border:2px dashed rgba(255,255,255,.1);
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;
   color:rgba(255,255,255,.3);font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:600;overflow:hidden;
@@ -149,19 +156,19 @@ body{font-family:'Montserrat',sans-serif;color:var(--text);overflow-x:hidden}
 /* ── TIMELINE ── */
 .timeline{position:relative;padding:8px 0}
 .tl-line{position:absolute;left:clamp(56px,12vw,80px);top:0;bottom:0;width:2px;background:linear-gradient(to bottom,transparent,var(--pale) 15%,var(--d4) 85%,transparent);opacity:.3}
-.tl-item{display:flex;align-items:flex-start;gap:clamp(14px,4vw,30px);margin-bottom:clamp(28px,5vw,44px);position:relative}
+.tl-item{display:flex;align-items:flex-start;gap:clamp(14px,4vw,30px);margin-bottom:40px;position:relative}
 .tl-item:last-child{margin-bottom:0}
-.tl-time{font-size:clamp(20px,4.5vw,28px);font-weight:800;color:var(--d3);width:clamp(56px,12vw,80px);flex-shrink:0;letter-spacing:-1px;line-height:1}
-.tl-dot{width:13px;height:13px;border-radius:50%;background:var(--d3);flex-shrink:0;margin-top:6px;position:relative;z-index:1}
-.tl-dot::after{content:'';position:absolute;inset:-4px;border-radius:50%;border:2px solid var(--pale);opacity:.4}
+.tl-time{font-size:clamp(20px,4.5vw,28px);font-weight:800;color:#142400;width:clamp(56px,12vw,80px);flex-shrink:0;letter-spacing:-1px;line-height:1}
+.tl-dot{width:13px;height:13px;border-radius:50%;background:#142400;flex-shrink:0;margin-top:6px;position:relative;z-index:1}
+.tl-dot::after{content:'';position:absolute;inset:-4px;border-radius:50%;border:2px solid #305700;opacity:.4}
 .tl-desc{font-family:'Cormorant Garamond',serif;font-size:clamp(17px,3.5vw,21px);line-height:1.5;color:var(--text2);font-style:italic;padding-top:2px}
 
 /* ── DRESSCODE ── */
 .color-swatches{display:flex;gap:clamp(12px,3vw,24px);flex-wrap:wrap;margin:28px 0 36px}
 .swatch-item{display:flex;flex-direction:column;align-items:center;gap:8px}
 .swatch{width:clamp(48px,10vw,68px);height:clamp(48px,10vw,68px);border-radius:50%;border:3px solid rgba(255,255,255,.8);box-shadow:0 4px 16px rgba(0,0,0,.1)}
-.swatch.c1{background:#0d2218}.swatch.c2{background:#1b3a2d}.swatch.c3{background:#3d7a5a}
-.swatch.c4{background:#a8c5b5}.swatch.c5{background:#c9a84c}.swatch.c6{background:#f4ede0;border-color:#d5c4a5}
+.swatch.c1{background:#142400}.swatch.c2{background:#305700}.swatch.c3{background:#4c9141}
+.swatch.c4{background:#582f11}.swatch.c5{background:#fbe7ca;border-color:#d5b88a}
 .swatch-name{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;color:var(--text2);opacity:.6}
 .outfit-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
 @media(max-width:360px){.outfit-grid{grid-template-columns:repeat(2,1fr)}}
@@ -170,7 +177,7 @@ body{font-family:'Montserrat',sans-serif;color:var(--text);overflow-x:hidden}
 
 /* ── GIFT ── */
 .gift-card{
-  background:radial-gradient(ellipse 100% 80% at 0% 0%,var(--d5) 0%,transparent 55%),radial-gradient(ellipse 80% 100% at 100% 100%,var(--d4) 0%,transparent 55%),var(--d3);
+  background:radial-gradient(ellipse 100% 80% at 0% 0%,#4c9141 0%,transparent 55%),radial-gradient(ellipse 80% 100% at 100% 100%,#305700 0%,transparent 55%),#142400;
   border-radius:20px;padding:clamp(36px,7vw,56px) clamp(28px,6vw,48px);text-align:center;position:relative;overflow:hidden;
 }
 .gift-card::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,.1) 0%,transparent 70%)}
@@ -179,29 +186,29 @@ body{font-family:'Montserrat',sans-serif;color:var(--text);overflow-x:hidden}
 .gift-text{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(17px,3.5vw,20px);line-height:1.75;color:var(--pale);max-width:480px;margin:0 auto}
 
 /* ── FORM ── */
-.form-card{background:#fff;border-radius:20px;padding:clamp(28px,6vw,52px) clamp(20px,5vw,44px);box-shadow:0 24px 64px rgba(9,26,18,.14);border:1px solid rgba(168,197,181,.2);max-width:640px;margin:0 auto}
+.form-card{background:#fff;border-radius:20px;padding:clamp(28px,6vw,52px) clamp(20px,5vw,44px);box-shadow:0 24px 64px rgba(20,36,0,.14);border:1px solid rgba(48,87,0,.15);max-width:640px;margin:0 auto}
 .field{margin-bottom:26px}
 .field-label{display:block;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;font-weight:700;color:var(--d3);margin-bottom:12px}
-.field-input{width:100%;padding:14px 16px;border:1.5px solid var(--pale);border-radius:10px;font-family:'Montserrat',sans-serif;font-size:15px;color:var(--text);background:var(--c1);outline:none;transition:border-color .2s,box-shadow .2s;-webkit-appearance:none;appearance:none}
-.field-input:focus{border-color:var(--d4);box-shadow:0 0 0 3px rgba(61,122,90,.1)}
+.field-input{width:100%;padding:14px 16px;border:1.5px solid #a8c5a0;border-radius:10px;font-family:'Montserrat',sans-serif;font-size:15px;color:var(--text);background:#fbe7ca;outline:none;transition:border-color .2s,box-shadow .2s;-webkit-appearance:none;appearance:none}
+.field-input:focus{border-color:#305700;box-shadow:0 0 0 3px rgba(48,87,0,.1)}
 .options{display:flex;flex-direction:column;gap:8px}
 .opt{display:flex;align-items:center;gap:14px;padding:13px 16px;border:1.5px solid rgba(168,197,181,.4);border-radius:10px;cursor:pointer;transition:all .2s;font-size:clamp(13px,3vw,15px);font-weight:500;color:var(--text2);user-select:none;-webkit-user-select:none;min-height:48px}
 .opt:hover{border-color:var(--pale);background:rgba(168,197,181,.06)}
 .opt input{display:none}
 .opt-indicator{width:20px;height:20px;flex-shrink:0;border:2px solid var(--pale);transition:all .2s;position:relative}
 .opt-indicator.round{border-radius:50%}.opt-indicator.square{border-radius:5px}
-.opt.active{border-color:var(--d3);background:rgba(27,58,45,.04)}
-.opt.active .opt-indicator{background:var(--d3);border-color:var(--d3)}
+.opt.active{border-color:#142400;background:rgba(20,36,0,.04)}
+.opt.active .opt-indicator{background:#142400;border-color:#142400}
 .opt.active .opt-indicator.round::after{content:'';position:absolute;width:8px;height:8px;background:#fff;border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%)}
 .opt.active .opt-indicator.square::after{content:'✓';position:absolute;color:#fff;font-size:12px;font-weight:800;line-height:1;top:50%;left:50%;transform:translate(-50%,-50%)}
-.submit-btn{width:100%;padding:17px;background:radial-gradient(ellipse 80% 80% at 20% 20%,var(--d4) 0%,transparent 60%),var(--d3);color:#fff;border:none;border-radius:12px;font-family:'Montserrat',sans-serif;font-size:12px;letter-spacing:3px;text-transform:uppercase;font-weight:700;cursor:pointer;transition:all .3s;margin-top:14px;min-height:54px}
+.submit-btn{width:100%;padding:17px;background:radial-gradient(ellipse 80% 80% at 20% 20%,#305700 0%,transparent 60%),#142400;color:#fff;border:none;border-radius:12px;font-family:'Montserrat',sans-serif;font-size:12px;letter-spacing:3px;text-transform:uppercase;font-weight:700;cursor:pointer;transition:all .3s;margin-top:14px;min-height:54px}
 .submit-btn:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(27,58,45,.3)}
 .submit-btn:active{transform:none}
 .success-msg{display:none;background:rgba(168,197,181,.12);border:1.5px solid var(--pale);border-radius:14px;padding:28px;text-align:center;margin-top:16px}
 .success-msg p{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(18px,4vw,22px);color:var(--d3);line-height:1.6}
 
 /* ── CONTACTS ── */
-.contact-card{background:radial-gradient(ellipse 70% 70% at 100% 0%,var(--d5) 0%,transparent 50%),radial-gradient(ellipse 80% 80% at 0% 100%,var(--d4) 0%,transparent 50%),var(--d3);border-radius:20px;padding:clamp(36px,7vw,56px) clamp(28px,6vw,48px);position:relative;overflow:hidden}
+.contact-card{background:radial-gradient(ellipse 70% 70% at 100% 0%,#4c9141 0%,transparent 50%),radial-gradient(ellipse 80% 80% at 0% 100%,#305700 0%,transparent 50%),#142400;border-radius:20px;padding:clamp(36px,7vw,56px) clamp(28px,6vw,48px);position:relative;overflow:hidden}
 .contact-card::after{content:'';position:absolute;bottom:-50px;left:-50px;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(168,197,181,.08) 0%,transparent 70%)}
 .contact-title{font-family:'Dancing Script',cursive;font-size:clamp(30px,6vw,40px);color:var(--white);margin-bottom:18px}
 .contact-desc{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(16px,3.5vw,19px);line-height:1.7;color:var(--pale);margin-bottom:28px}
@@ -313,6 +320,11 @@ footer>*{position:relative;z-index:1}
       </div>
     </div>
 
+    <!-- Большое фото снизу -->
+    <div class="ph ph-big">
+      <img src="images/3.jpg" alt="">
+    </div>
+
     <p class="hero-caption">Время пронеслось незаметно — и вот эти двое милых детей наконец решили сделать всё официально. Да, мы сами в шоке!</p>
     <div class="hero-badge"><div class="hero-badge-date">01 · 08 · 2026</div></div>
   </section>
@@ -331,9 +343,9 @@ footer>*{position:relative;z-index:1}
 </div>
 
 <!-- ══ WAVE dark → cream ══ -->
-<div style="background:#f9f3e8;line-height:0;display:block;font-size:0;overflow:hidden">
+<div style="background:#fbe7ca;line-height:0;display:block;font-size:0;overflow:hidden">
   <svg viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="display:block;width:100%">
-    <path d="M0,0 C200,80 500,0 720,50 C940,100 1200,10 1440,45 L1440,0 Z" fill="#0f2318"/>
+    <path d="M0,0 C200,80 500,0 720,50 C940,100 1200,10 1440,45 L1440,0 Z" fill="#142400"/>
   </svg>
 </div>
 
@@ -365,12 +377,11 @@ footer>*{position:relative;z-index:1}
       <div class="rule r d2"></div>
       <p class="body-text r d2 mb24">Для нас главное — ваше присутствие! Но мы будем рады, если в своих нарядах вы поддержите цветовую гамму нашей свадьбы:</p>
       <div class="color-swatches r d3">
-        <div class="swatch-item"><div class="swatch c1"></div><div class="swatch-name">изумруд</div></div>
-        <div class="swatch-item"><div class="swatch c2"></div><div class="swatch-name">лес</div></div>
-        <div class="swatch-item"><div class="swatch c3"></div><div class="swatch-name">зелёный</div></div>
-        <div class="swatch-item"><div class="swatch c4"></div><div class="swatch-name">шалфей</div></div>
-        <div class="swatch-item"><div class="swatch c5"></div><div class="swatch-name">золото</div></div>
-        <div class="swatch-item"><div class="swatch c6"></div><div class="swatch-name">айвори</div></div>
+        <div class="swatch-item"><div class="swatch c1"></div><div class="swatch-name">Тёмно-зеленый</div></div>
+        <div class="swatch-item"><div class="swatch c2"></div><div class="swatch-name">Оливковый</div></div>
+        <div class="swatch-item"><div class="swatch c3"></div><div class="swatch-name">Светло-зеленый</div></div>
+        <div class="swatch-item"><div class="swatch c4"></div><div class="swatch-name">Коричневый</div></div>
+        <div class="swatch-item"><div class="swatch c5"></div><div class="swatch-name">Бежевый</div></div>
       </div>
       <div class="outfit-grid r d3">
         <div class="outfit-ph"><img src="images/look-3.jpg" alt=""></div>
@@ -400,7 +411,7 @@ footer>*{position:relative;z-index:1}
       <h2 class="heading r d1">Заполните, пожалуйста</h2>
       <div class="rule r d2"></div>
       <div class="form-card r d2">
-        <form id="guestForm" name="wedding-guests" netlify>
+        <form id="guestForm" name="wedding-guests">
           <div class="field">
             <label class="field-label">Ваши фамилия и имя</label>
             <input class="field-input" type="text" name="name" placeholder="Иванов Иван" required>
@@ -452,9 +463,9 @@ footer>*{position:relative;z-index:1}
 </div><!-- /zone-cream -->
 
 <!-- ══ WAVE cream → dark ══ -->
-<div style="background:#0f2318;line-height:0;display:block;font-size:0;overflow:hidden">
+<div style="background:#142400;line-height:0;display:block;font-size:0;overflow:hidden">
   <svg viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="display:block;width:100%">
-    <path d="M0,0 C200,80 500,0 720,50 C940,100 1200,10 1440,45 L1440,0 Z" fill="#f9f3e8"/>
+    <path d="M0,0 C200,80 500,0 720,50 C940,100 1200,10 1440,45 L1440,0 Z" fill="#fbe7ca"/>
   </svg>
 </div>
 
@@ -508,10 +519,48 @@ document.querySelectorAll('.opt').forEach(opt=>{
   });
 });
 
-document.getElementById('guestForm').addEventListener('submit',function(e){
-  const entry={id:Date.now(),ts:new Date().toLocaleString('ru'),name:this.querySelector('input[name="name"]').value,attendance:this.querySelector('input[name="attendance"]:checked')?.value||'',food:this.querySelector('input[name="food"]:checked')?.value||'',drinks:[...this.querySelectorAll('input[name="drinks"]:checked')].map(i=>i.value).join(', ')};
-  const list=JSON.parse(localStorage.getItem('wedding_guests')||'[]');list.push(entry);localStorage.setItem('wedding_guests',JSON.stringify(list));
-  if(window.location.protocol==='file:'){e.preventDefault();this.style.display='none';document.getElementById('successMsg').style.display='block';}
+document.getElementById('guestForm').addEventListener('submit', async function(e){
+  e.preventDefault();
+
+  const entry = {
+    name: this.querySelector('input[name="name"]').value,
+    attendance: this.querySelector('input[name="attendance"]:checked')?.value || '',
+    food: this.querySelector('input[name="food"]:checked')?.value || '',
+    drinks: [...this.querySelectorAll('input[name="drinks"]:checked')].map(i=>i.value).join(', '),
+    submitted_at: new Date().toISOString()
+  };
+
+  // ── Supabase ──────────────────────────────────────
+  const SUPABASE_URL  = 'ВСТАВЬТЕ_SUPABASE_URL';   // ← заменить
+  const SUPABASE_ANON = 'ВСТАВЬТЕ_SUPABASE_ANON_KEY'; // ← заменить
+
+  let saved = false;
+
+  if (SUPABASE_URL !== 'ВСТАВЬТЕ_SUPABASE_URL') {
+    try {
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/wedding_guests`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': SUPABASE_ANON,
+          'Authorization': `Bearer ${SUPABASE_ANON}`,
+          'Prefer': 'return=minimal'
+        },
+        body: JSON.stringify(entry)
+      });
+      if (res.ok) saved = true;
+    } catch(err) {
+      console.warn('Supabase error:', err);
+    }
+  }
+
+  // ── Резервно: localStorage ─────────────────────────
+  const list = JSON.parse(localStorage.getItem('wedding_guests') || '[]');
+  list.push({id: Date.now(), ...entry});
+  localStorage.setItem('wedding_guests', JSON.stringify(list));
+
+  this.style.display = 'none';
+  document.getElementById('successMsg').style.display = 'block';
 });
 
 const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('v');obs.unobserve(e.target);}}),{threshold:.1});
