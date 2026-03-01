@@ -144,14 +144,13 @@ body{font-family:'Montserrat',sans-serif;color:var(--text);overflow-x:hidden}
 /* ── PLACE ── */
 .address-block{font-size:clamp(15px,3.5vw,18px);line-height:1.9;color:var(--pale);font-weight:400;margin-bottom:36px}
 .map-placeholder{cursor:pointer;
-  width:100%;aspect-ratio:16/8;
+  width:100%;
   background:linear-gradient(135deg,#305700 0%,#142400 100%);
-  border-radius:14px;border:2px dashed rgba(255,255,255,.1);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;
-  color:rgba(255,255,255,.3);font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:600;overflow:hidden;
+  border-radius:14px;overflow:hidden;
+  display:block;line-height:0;
 }
 .map-placeholder svg{width:32px;height:32px;opacity:.4}
-.map-placeholder img{width:100%;height:100%;object-fit:cover;border-radius:12px}
+.map-placeholder img{width:100%;height:auto;display:block;border-radius:12px}
 
 /* ── TIMELINE ── */
 .timeline{position:relative;padding:8px 0}
@@ -315,14 +314,14 @@ footer>*{position:relative;z-index:1}
         <span class="ph-label">жених</span>
       </div>
       <div class="ph">
-        <img src="images/1.jpg" alt="">
+        <img src="images/13.jpg" alt="">
         <span class="ph-label">невеста</span>
       </div>
     </div>
 
     <!-- Большое фото снизу -->
     <div class="ph ph-big">
-      <img src="images/3.jpg" alt="">
+      <img src="images/12.jpg" alt="">
     </div>
 
     <p class="hero-caption">Время пронеслось незаметно — и вот эти двое милых детей наконец решили сделать всё официально. Да, мы сами в шоке!</p>
@@ -336,7 +335,7 @@ footer>*{position:relative;z-index:1}
       <div class="rule light r d2"></div>
       <div class="address-block r d2">Парк-отель «Торбеево Озеро»<br>Московская обл., д. Березняки<br>Ярославское ш., 61-й км</div>
       <div class="map-placeholder r d3">
-        <img src="images/map.jpg" alt="">
+        <img src="images/map-1.jpg" alt="">
       </div>
     </div>
   </div>
