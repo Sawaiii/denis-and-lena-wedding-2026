@@ -533,30 +533,24 @@ document.getElementById('guestForm').addEventListener('submit', async function(e
   const SUPABASE_URL  = 'https://trpctzihmaeqpbllodkq.supabase.co';   // ← заменить
   const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRycGN0emlobWFlcXBibGxvZGtxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIzOTA3MTgsImV4cCI6MjA4Nzk2NjcxOH0.8UQb_wNrZQCudkmu5V9bTZSfdQox_N-Y5aQKdso5s1o'; // ← заменить
 
-  let saved = false;
-
-  if (SUPABASE_URL !== 'https://trpctzihmaeqpbllodkq.supabase.co') {
-    try {
-      const res = await fetch(`${SUPABASE_URL}/rest/v1/wedding_guests`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'apikey': SUPABASE_ANON,
-          'Authorization': `Bearer ${SUPABASE_ANON}`,
-          'Prefer': 'return=minimal'
-        },
-        body: JSON.stringify(entry)
-      });
-      if (res.ok) saved = true;
-    } catch(err) {
-      console.warn('Supabase error:', err);
+  try {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/wedding_guests`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': SUPABASE_ANON,
+        'Authorization': `Bearer ${SUPABASE_ANON}`,
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify(entry)
+    });
+    if (!res.ok) {
+      const err = await res.text();
+      console.error('Supabase error:', res.status, err);
     }
+  } catch(err) {
+    console.error('Supabase fetch failed:', err);
   }
-
-  // ── Резервно: localStorage ─────────────────────────
-  const list = JSON.parse(localStorage.getItem('wedding_guests') || '[]');
-  list.push({id: Date.now(), ...entry});
-  localStorage.setItem('wedding_guests', JSON.stringify(list));
 
   this.style.display = 'none';
   document.getElementById('successMsg').style.display = 'block';
