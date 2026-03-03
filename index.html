@@ -424,10 +424,11 @@ footer>*{position:relative;z-index:1}
             </div>
           </div>
           <div class="field">
-            <label class="field-label">Что предпочитаете из горячего?</label>
+            <label class="field-label">Что предпочитаете из горячего? (можно выбрать несколько)</label>
             <div class="options">
-              <label class="opt"><input type="radio" name="food" value="Птица"><div class="opt-indicator round"></div>Птица</label>
-              <label class="opt"><input type="radio" name="food" value="Мясо"><div class="opt-indicator round"></div>Мясо</label>
+              <label class="opt"><input type="checkbox" name="food" value="Птица"><div class="opt-indicator square"></div>Птица</label>
+              <label class="opt"><input type="checkbox" name="food" value="Мясо"><div class="opt-indicator square"></div>Мясо</label>
+              <label class="opt"><input type="checkbox" name="food" value="Рыба"><div class="opt-indicator square"></div>Рыба</label>
             </div>
           </div>
           <div class="field">
@@ -525,7 +526,7 @@ document.getElementById('guestForm').addEventListener('submit', async function(e
   const entry = {
     name: this.querySelector('input[name="name"]').value,
     attendance: this.querySelector('input[name="attendance"]:checked')?.value || '',
-    food: this.querySelector('input[name="food"]:checked')?.value || '',
+    food: [...this.querySelectorAll('input[name="food"]:checked')].map(i=>i.value).join(', '),
     drinks: [...this.querySelectorAll('input[name="drinks"]:checked')].map(i=>i.value).join(', '),
     submitted_at: new Date().toISOString()
   };

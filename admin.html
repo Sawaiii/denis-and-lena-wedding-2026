@@ -236,6 +236,7 @@ alter table wedding_guests enable row level security;</div>
     <div class="stat-card"><div class="stat-num" id="st-no">—</div><div class="stat-label">не смогут</div></div>
     <div class="stat-card"><div class="stat-num" id="st-bird">—</div><div class="stat-label">птица</div></div>
     <div class="stat-card"><div class="stat-num" id="st-meat">—</div><div class="stat-label">мясо</div></div>
+    <div class="stat-card"><div class="stat-num" id="st-fish">—</div><div class="stat-label">рыба</div></div>
   </div>
 
   <div class="source-banner">
@@ -445,8 +446,9 @@ function renderStats() {
   document.getElementById('st-total').textContent = allGuests.length;
   document.getElementById('st-yes').textContent   = yes;
   document.getElementById('st-no').textContent    = no;
-  document.getElementById('st-bird').textContent  = allGuests.filter(g => g.food === 'Птица').length;
-  document.getElementById('st-meat').textContent  = allGuests.filter(g => g.food === 'Мясо').length;
+  document.getElementById('st-bird').textContent  = allGuests.filter(g => g.food.includes('Птица')).length;
+  document.getElementById('st-meat').textContent  = allGuests.filter(g => g.food.includes('Мясо')).length;
+  document.getElementById('st-fish').textContent  = allGuests.filter(g => g.food.includes('Рыба')).length;
 }
 
 function setFilter(f, btn) {
