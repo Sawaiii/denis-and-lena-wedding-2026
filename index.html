@@ -299,7 +299,6 @@ footer>*{position:relative;z-index:1}
   </div>
 </div>
 
-<!-- ══ DARK ZONE ══ -->
 <div class="zone-dark">
   <section class="hero">
     <div class="orb orb1"></div>
@@ -308,7 +307,6 @@ footer>*{position:relative;z-index:1}
     <h1 class="hero-names">Денис + Лена</h1>
     <p class="hero-sub">= это было неизбежно</p>
 
-    <!-- 2 фото: жених и невеста -->
     <div class="photo-grid">
       <div class="ph">
         <img src="images/2.jpg" alt="">
@@ -320,7 +318,6 @@ footer>*{position:relative;z-index:1}
       </div>
     </div>
 
-    <!-- Большое фото снизу -->
     <div class="ph ph-big">
       <img src="images/12.jpg" alt="">
     </div>
@@ -342,14 +339,12 @@ footer>*{position:relative;z-index:1}
   </div>
 </div>
 
-<!-- ══ WAVE dark → cream ══ -->
 <div style="background:#fbe7ca;line-height:0;display:block;font-size:0;overflow:hidden">
   <svg viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="display:block;width:100%">
     <path d="M0,0 C200,80 500,0 720,50 C940,100 1200,10 1440,45 L1440,0 Z" fill="#142400"/>
   </svg>
 </div>
 
-<!-- ══ CREAM ZONE ══ -->
 <div class="zone-cream">
 
   <div class="section">
@@ -424,6 +419,14 @@ footer>*{position:relative;z-index:1}
             </div>
           </div>
           <div class="field">
+            <label class="field-label">Нужен ли вам трансфер?</label>
+            <div class="options">
+              <label class="opt"><input type="radio" name="transfer" value="Торбеево - Сергиев Посад (только обратно)" required><div class="opt-indicator round"></div>Торбеево - Сергиев Посад (только обратно)</label>
+              <label class="opt"><input type="radio" name="transfer" value="Торбеево - Александров (туда обратно)"><div class="opt-indicator round"></div>Торбеево - Александров (туда обратно)</label>
+              <label class="opt"><input type="radio" name="transfer" value="Не нужен"><div class="opt-indicator round"></div>Не нужен</label>
+            </div>
+          </div>
+          <div class="field">
             <label class="field-label">Что предпочитаете из горячего?</label>
             <div class="options">
               <label class="opt"><input type="checkbox" name="food" value="Птица"><div class="opt-indicator square"></div>Птица</label>
@@ -461,16 +464,12 @@ footer>*{position:relative;z-index:1}
     </div>
   </div>
 
-</div><!-- /zone-cream -->
-
-<!-- ══ WAVE cream → dark ══ -->
-<div style="background:#142400;line-height:0;display:block;font-size:0;overflow:hidden">
+</div><div style="background:#142400;line-height:0;display:block;font-size:0;overflow:hidden">
   <svg viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="display:block;width:100%">
     <path d="M0,0 C200,80 500,0 720,50 C940,100 1200,10 1440,45 L1440,0 Z" fill="#fbe7ca"/>
   </svg>
 </div>
 
-<!-- ══ DARK BOTTOM ══ -->
 <div class="zone-bottom">
 
   <div class="section">
@@ -526,6 +525,7 @@ document.getElementById('guestForm').addEventListener('submit', async function(e
   const entry = {
     name: this.querySelector('input[name="name"]').value,
     attendance: this.querySelector('input[name="attendance"]:checked')?.value || '',
+    transfer: this.querySelector('input[name="transfer"]:checked')?.value || '',
     food: [...this.querySelectorAll('input[name="food"]:checked')].map(i=>i.value).join(', '),
     drinks: [...this.querySelectorAll('input[name="drinks"]:checked')].map(i=>i.value).join(', '),
     submitted_at: new Date().toISOString()
@@ -587,7 +587,6 @@ document.querySelectorAll('.r').forEach(el=>obs.observe(el));
 })();
 </script>
 
-<!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox">
   <div class="lb-close" id="lbClose">✕</div>
   <div class="lb-nav lb-prev" id="lbPrev">‹</div>

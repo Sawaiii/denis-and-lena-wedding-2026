@@ -92,7 +92,7 @@ body{font-family:'Montserrat',sans-serif;background:radial-gradient(ellipse 70% 
 
 /* table */
 .table-wrap{padding:0 clamp(16px,5vw,40px) 60px;max-width:1100px;margin:0 auto;overflow-x:auto}
-.guests-table{width:100%;border-collapse:separate;border-spacing:0 8px;min-width:640px}
+.guests-table{width:100%;border-collapse:separate;border-spacing:0 8px;min-width:760px}
 .guests-table thead th{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;font-weight:700;color:var(--text2);opacity:.55;padding:0 14px 6px;text-align:left}
 .guests-table tbody tr{background:#fff;border-radius:12px;box-shadow:0 2px 8px rgba(20,36,0,.05);transition:box-shadow .2s,transform .15s}
 .guests-table tbody tr:hover{box-shadow:0 6px 20px rgba(20,36,0,.1);transform:translateY(-1px)}
@@ -148,7 +148,6 @@ body{font-family:'Montserrat',sans-serif;background:radial-gradient(ellipse 70% 
 </head>
 <body>
 
-<!-- ══ LOGIN ══ -->
 <div id="screenLogin" class="screen active">
   <div class="card card-center">
     <div class="logo">Денис & Лена</div>
@@ -160,7 +159,6 @@ body{font-family:'Montserrat',sans-serif;background:radial-gradient(ellipse 70% 
   </div>
 </div>
 
-<!-- ══ SETUP ══ -->
 <div id="screenSetup" class="screen">
   <div style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px">
     <div class="card" style="max-width:560px">
@@ -175,10 +173,14 @@ body{font-family:'Montserrat',sans-serif;background:radial-gradient(ellipse 70% 
   id bigint generated always as identity primary key,
   name text,
   attendance text,
+  transfer text,
   food text,
   drinks text,
   submitted_at timestamptz default now()
 );
+
+-- Если таблица уже создана, просто выполните:
+-- alter table wedding_guests add column transfer text;
 
 -- разрешить запись всем (для формы на сайте)
 create policy "insert" on wedding_guests
@@ -213,7 +215,6 @@ alter table wedding_guests enable row level security;</div>
   </div>
 </div>
 
-<!-- ══ APP ══ -->
 <div id="screenApp" class="screen">
   <header class="app-header">
     <div class="header-left">
@@ -231,9 +232,10 @@ alter table wedding_guests enable row level security;</div>
   <div class="loading-bar" id="loadingBar"></div>
 
   <div class="stats-row">
-    <div class="stat-card"><div class="stat-num" id="st-total">—</div><div class="stat-label">всего ответов</div></div>
+    <div class="stat-card"><div class="stat-num" id="st-total">—</div><div class="stat-label">всего</div></div>
     <div class="stat-card"><div class="stat-num" id="st-yes">—</div><div class="stat-label">придут</div></div>
     <div class="stat-card"><div class="stat-num" id="st-no">—</div><div class="stat-label">не смогут</div></div>
+    <div class="stat-card"><div class="stat-num" id="st-transfer">—</div><div class="stat-label">трансфер</div></div>
     <div class="stat-card"><div class="stat-num" id="st-bird">—</div><div class="stat-label">птица</div></div>
     <div class="stat-card"><div class="stat-num" id="st-meat">—</div><div class="stat-label">мясо</div></div>
     <div class="stat-card"><div class="stat-num" id="st-fish">—</div><div class="stat-label">рыба</div></div>
@@ -254,7 +256,7 @@ alter table wedding_guests enable row level security;</div>
   <div class="table-wrap">
     <table class="guests-table">
       <thead><tr>
-        <th>#</th><th>Имя</th><th>Придёт?</th><th>Горячее</th><th>Напитки</th><th>Дата ответа</th><th></th>
+        <th>#</th><th>Имя</th><th>Придёт?</th><th>Трансфер</th><th>Горячее</th><th>Напитки</th><th>Дата ответа</th><th></th>
       </tr></thead>
       <tbody id="tableBody"></tbody>
     </table>
@@ -266,7 +268,6 @@ alter table wedding_guests enable row level security;</div>
   </div>
 </div>
 
-<!-- ══ CONFIRM ══ -->
 <div class="overlay" id="confirmOverlay">
   <div class="confirm-box">
     <div class="confirm-icon" id="cIcon">🗑</div>
@@ -411,6 +412,7 @@ async function loadGuests() {
                     : '',
       name:       r.name       || '',
       attendance: r.attendance || '',
+      transfer:   r.transfer   || '',
       food:       r.food       || '',
       drinks:     r.drinks     || ''
     }));
@@ -446,6 +448,7 @@ function renderStats() {
   document.getElementById('st-total').textContent = allGuests.length;
   document.getElementById('st-yes').textContent   = yes;
   document.getElementById('st-no').textContent    = no;
+  document.getElementById('st-transfer').textContent = allGuests.filter(g => g.transfer && !g.transfer.includes('Не нужен')).length;
   document.getElementById('st-bird').textContent  = allGuests.filter(g => g.food.includes('Птица')).length;
   document.getElementById('st-meat').textContent  = allGuests.filter(g => g.food.includes('Мясо')).length;
   document.getElementById('st-fish').textContent  = allGuests.filter(g => g.food.includes('Рыба')).length;
@@ -485,6 +488,7 @@ function renderTable() {
       <td style="color:#aaa;font-size:13px;width:28px">${i+1}</td>
       <td class="td-name">${esc(g.name)}</td>
       <td><span class="chip ${cls}">${lbl}</span></td>
+      <td>${g.transfer ? `<span style="font-size:12px;color:var(--text2)">${esc(g.transfer)}</span>` : '<span style="opacity:.3">—</span>'}</td>
       <td>${g.food ? `<span class="chip chip-food">${esc(g.food)}</span>` : '<span style="opacity:.3">—</span>'}</td>
       <td><div class="drinks-list">${g.drinks ? esc(g.drinks) : '<span style="opacity:.3">—</span>'}</div></td>
       <td class="td-ts">${esc(g.ts)}</td>
@@ -498,6 +502,7 @@ function renderTable() {
       <button class="m-card-del" onclick="confirmDel(${g.id},'${esc(g.name)}')" title="Удалить">✕</button>
       <div class="m-card-name">${esc(g.name)}</div>
       <div class="m-card-row"><div class="m-card-key">Статус</div><span class="chip ${cls}">${lbl}</span></div>
+      ${g.transfer ? `<div class="m-card-row"><div class="m-card-key">Трансфер</div><div style="font-size:13px;color:var(--text2)">${esc(g.transfer)}</div></div>` : ''}
       ${g.food   ? `<div class="m-card-row"><div class="m-card-key">Горячее</div><span class="chip chip-food">${esc(g.food)}</span></div>` : ''}
       ${g.drinks ? `<div class="m-card-row"><div class="m-card-key">Напитки</div><div style="font-size:13px">${esc(g.drinks)}</div></div>` : ''}
       <div class="m-card-ts">${esc(g.ts)}</div>
@@ -537,8 +542,8 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeConfirm
 // ════════════════════════════════════════════
 function exportCSV() {
   const rows = [
-    ['#','Имя','Придёт','Горячее','Напитки','Время'],
-    ...allGuests.map((g,i) => [i+1, g.name, g.attendance, g.food, g.drinks, g.ts])
+    ['#','Имя','Придёт','Трансфер','Горячее','Напитки','Время'],
+    ...allGuests.map((g,i) => [i+1, g.name, g.attendance, g.transfer, g.food, g.drinks, g.ts])
   ];
   const csv = rows.map(r => r.map(c => `"${String(c||'').replace(/"/g,'""')}"`).join(';')).join('\n');
   const a = Object.assign(document.createElement('a'), {
